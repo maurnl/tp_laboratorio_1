@@ -80,7 +80,7 @@ int main(void) {
 							flagLatam = 1;
 							break;
 						default:
-							printf("Opción no válida");
+							printf("Opción no válida. \n");
 							break;
 					}
 				}

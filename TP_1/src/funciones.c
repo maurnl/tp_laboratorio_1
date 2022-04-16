@@ -58,7 +58,7 @@ float precioUnitario(float precioTotal, float unidades, float* resultado) {
 	return retorno;
 }
 
-float pedirFloat(char mensaje[]) {
+float pedirFloatPositivo(char mensaje[]) {
 	float numero;
 
 	printf(mensaje);
@@ -67,6 +67,19 @@ float pedirFloat(char mensaje[]) {
 		printf("Numero no válido.\n");
 		printf(mensaje);
 		scanf("%f", &numero);
+	}
+
+	return numero;
+}
+
+int pedirIntPositivo(char mensaje[]) {
+	int numero;
+	printf(mensaje);
+	scanf("%d", &numero);
+	while(numero < 0) {
+		printf("Numero no válido.\n");
+		printf(mensaje);
+		scanf("%d", &numero);
 	}
 
 	return numero;

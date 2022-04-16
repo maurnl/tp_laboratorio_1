@@ -42,14 +42,14 @@ int main(void) {
 	do {
 		// Imprimir menú y pedir opción
 		imprimirMenu(km, precioAerolineas, precioLatam);
-		scanf("%d", &opcion);
+		opcion = pedirIntPositivo("Ingrese una opción: ");
 		switch(opcion) {
 			case 1:
 				// Pedir kilómetros y levantar bandera
 				printf("Opcion 1. Ingresar kilómetros.\n");
 				printf("Kilómetros actual: %.2f km\n", km);
 				if(preguntar("Desea ingresar kilómetros nuevos? (s/n)")) {
-					km = pedirFloat("Ingrese kilómetros de viaje: \n");
+					km = pedirFloatPositivo("Ingrese kilómetros de viaje: \n");
 				}
 				flagKilometros = 1;
 				break;
@@ -63,20 +63,20 @@ int main(void) {
 					printf("1. Aerolineas.\n");
 					printf("2. Latam\n");
 					printf("3. Ambos\n");
-					scanf("%d", &subOpcion);
+					subOpcion = pedirIntPositivo(" ");
 					switch(subOpcion) {
 						case 1:
-							precioAerolineas = pedirFloat("Ingrese precio Aerolineas nuevo: \n");
+							precioAerolineas = pedirFloatPositivo("Ingrese precio Aerolineas nuevo: \n");
 							flagAerolineas = 1;
 							break;
 						case 2:
-							precioLatam = pedirFloat("Ingrese precio Latam nuevo: \n");
+							precioLatam = pedirFloatPositivo("Ingrese precio Latam nuevo: \n");
 							flagLatam = 1;
 							break;
 						case 3:
-							precioAerolineas = pedirFloat("Ingrese precio Aerolineas nuevo: \n");
+							precioAerolineas = pedirFloatPositivo("Ingrese precio Aerolineas nuevo: \n");
 							flagAerolineas = 1;
-							precioLatam = pedirFloat("Ingrese precio Latam nuevo: \n");
+							precioLatam = pedirFloatPositivo("Ingrese precio Latam nuevo: \n");
 							flagLatam = 1;
 							break;
 						default:

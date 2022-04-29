@@ -32,4 +32,10 @@ float precioUnitario(float precioTotal, float unidades,float* resultado);
  * @param mensaje Es el mensaje a mostrar
  * @return el valor float ingresado por el usuario
  */
-float pedirFloat(char mensaje[]);
+float pedirFloatPositivo(char mensaje[]);
+/**
+ * @brief Muestra al usuario un mensaje y luego le pide un valor de tipo int mayor a 0
+ * @param mensaje Es el mensaje a mostrar
+ * @return el valor int ingresado por el usuario
+ */
+int pedirIntPositivo(char mensaje[]);

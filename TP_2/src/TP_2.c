@@ -10,8 +10,26 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "ArrayPassenger.h"
+#include "funciones.h"
 
 int main(void) {
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
-	return EXIT_SUCCESS;
+	int opcion;
+	do {
+		switch(opcion){
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			default:
+				break;
+		}
+
+	} while(opcion!=5);
 }

@@ -9,15 +9,26 @@
 #define ARRAYPASSENGER_H_
 
 typedef struct {
+	char flycode[10];
+	char status[10];
+}Flight;
+
+typedef struct {
+	int idTypePassenger;
+	char description[21];
+}TypePassenger;
+
+typedef struct {
 	int id;
 	char name[51];
 	char lastName[51];
 	float price;
-	char flycode[10];
-	int typePassenger;
+	char flycode[10]; // Flight FK.
+	int typePassenger; // TypePassenger FK.
 	int isEmpty;
-} Passenger;
+}Passenger;
 
+#endif /* ARRAYPASSENGER_H_ */
 /** \brief To indicate that all position in the array are empty,* this function put the flag (isEmpty) in TRUE in all* position of the array
 * \param list Passenger* Pointer to array of passenger
 * \param len int Array length
@@ -42,7 +53,6 @@ int addPassenger(Passenger* list, int len, int id, char name[],char lastName[],f
 * \param len int
 * \param id int
 * \return Return passenger index position or (-1) if [Invalid length or NULL pointer received or passenger not found]
-*
 */
 int findPassengerById(Passenger* list, int len,int id);
 
@@ -57,22 +67,29 @@ int findPassengerById(Passenger* list, int len,int id);
 int removePassenger(Passenger* list, int len, int id);
 
 /** \brief Sort the elements in the array of passengers, the argument order indicate UP or DOWN order
-*
 * \param list Passenger*
 * \param len int
 * \param order int [1] indicate UP - [0] indicate DOWN
 * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok*
 */
 int sortPassengers(Passenger* list, int len, int order);
+/**
+ * @brief Prints a single passenger data
+ * @param id
+ * @param name
+ * @param lastName
+ * @param price
+ * @param flycode
+ * @param typePassenger
+ */
+void printPassenger(TypePassenger* listTypes, int lengthTypes, int id, char lastName[], char name[], float price, char flycode[], int typePassenger, int header);
 
 /** \brief print the content of passengers array
-*
 * \param list Passenger*
 * \param length int
-* \return int
-*
+* \return int Returns (-1) if Error [NULL *list pointer or invalid length] - (0) if OK
 */
-int printPassenger(Passenger* list, int length);
+int printPassengers(Passenger* list, TypePassenger* listTypes,int length, int lengthTypes);
 
 /** \brief Sort the elements in the array of passengers, the argument order indicate UP or DOWN order
 *
@@ -81,6 +98,28 @@ int printPassenger(Passenger* list, int length);
 * \param order int [1] indicate UP - [0] indicate DOWN
 * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok*
 */
-int sortPassengers(Passenger* list, int len, int order);
+int sortPassengersByCode(Passenger* list, Flight* flycodeList, int len, int flycodeLen);
 
-#endif /* ARRAYPASSENGER_H_ */
+/**
+ * brief Finds the first empty position in *list and returns it
+ * @param *list Passenger* list
+ * @param len length of Passenger* list
+ * @return Return first empty position index or (-1) if error [NULL *list pointer or invalid length or no free index]
+ */
+int getEmptyIndex(Passenger* list, int len);
+
+int getTypePassengerByCode(TypePassenger* list, int len, int typePassenger, char description[]);
+
+void printFlight(char code[10], char description[10]);
+
+int printFlights(Flight* list, int len);
+
+int getAveragePrice(Passenger* list, int len, float* average, float* total);
+
+int printHigherThanAveragePassengers(Passenger* list, int len);
+
+int getFlightStatusByCode(Flight* list, int len, char code[], char status[]);
+
+int printPassengersByCode(Passenger* list, Flight* listFlight,int length, int lengthFlight);
+
+void altaForzada(Passenger* list, int len, int* activePassengers, int* passengerCounter);

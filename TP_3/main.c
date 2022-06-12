@@ -105,7 +105,7 @@ int main()
             	}
             	break;
             case 8:
-            	salida=controller_saveAsText("data2.csv", listaPasajeros);
+            	salida=controller_saveAsText("data.csv", listaPasajeros);
             	switch(salida){
 					case 0:
 						printf("- CAMBIOS GUARDADOS CORRECTAMENTE.\n");

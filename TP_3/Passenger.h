@@ -39,7 +39,9 @@ int Passenger_setCodigoVuelo(Passenger* this,char* codigoVuelo);
 int Passenger_getCodigoVuelo(Passenger* this,char* codigoVuelo);
 
 int Passenger_setTipoPasajero(Passenger* this,int tipoPasajero);
+int Passenger_setTipoPasajeroStr(Passenger* this,char* tipoPasajero);
 int Passenger_getTipoPasajero(Passenger* this,int* tipoPasajero);
+int Passenger_getTipoPasajeroStr(Passenger* this, char* tipoPasajero);
 
 int Passenger_setPrecio(Passenger* this,float precio);
 int Passenger_getPrecio(Passenger* this,float* precio);

@@ -25,8 +25,9 @@ int parser_PassengerFromText(FILE* pArchivo, LinkedList* pArrayListPassenger)
 	while(!feof(pArchivo)){
 		leido=fscanf(pArchivo, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", buffers[0], buffers[1], buffers[2], buffers[3], buffers[4], buffers[5], buffers[6]);
 		if(leido==7){
-			passengerBuff=Passenger_newParametros(atoi(buffers[0]),buffers[1],buffers[2],atof(buffers[3]),1,buffers[4], buffers[6]);
+			passengerBuff=Passenger_newParametros(atoi(buffers[0]),buffers[1],buffers[2],atof(buffers[3]),2,buffers[4], buffers[6]);
 			if(passengerBuff!=NULL){
+				Passenger_setTipoPasajeroStr(passengerBuff, buffers[5]);
 				ll_add(pArrayListPassenger, passengerBuff);
 			}
 		} else if(!feof(pArchivo)){
@@ -96,8 +97,8 @@ int parser_saveAsBinary(FILE* pArchivo, LinkedList* pArrayListPassenger){
 int parser_saveAsText(FILE* pArchivo, LinkedList* pArrayListPassenger){
 	int retorno=0;
 	Passenger* passengerAux=NULL;
-	int idAux, tipoAux;
-	char nombreAux[50], apellidoAux[50], codigoAux[9], estadoAux[25];
+	int idAux;
+	char nombreAux[50], apellidoAux[50], codigoAux[9], estadoAux[25], tipoAux[25];
 	float precioAux;
 	fprintf(pArchivo, "id,name,lastname,price,flycode,typePassenger,statusFlight\n");
 	for(int i=0;i<ll_len(pArrayListPassenger);i++){
@@ -108,9 +109,9 @@ int parser_saveAsText(FILE* pArchivo, LinkedList* pArrayListPassenger){
 			Passenger_getApellido(passengerAux, apellidoAux);
 			Passenger_getPrecio(passengerAux, &precioAux);
 			Passenger_getCodigoVuelo(passengerAux, codigoAux);
-			Passenger_getTipoPasajero(passengerAux, &tipoAux);
+			Passenger_getTipoPasajeroStr(passengerAux, tipoAux);
 			Passenger_getEstadoVuelo(passengerAux, estadoAux);
-			fprintf(pArchivo, "%d,%s,%s,%.0f,%s,%d,%s\n", idAux, nombreAux, apellidoAux, precioAux, codigoAux, tipoAux, estadoAux);
+			fprintf(pArchivo, "%d,%s,%s,%.0f,%s,%s,%s\n", idAux, nombreAux, apellidoAux, precioAux, codigoAux, tipoAux, estadoAux);
 		}  else {
 			retorno=-1;
 			break;

@@ -127,7 +127,7 @@ int controller_loadFromBinary(char* path, LinkedList* pArrayListPassenger)
 		if(ll_isEmpty(pArrayListPassenger)){
 			printf("- REALIZANDO LECTURA...\n");
 			retorno=parser_PassengerFromBinary(pArchivo, pArrayListPassenger);
-		} else if(confirm("- SE DETECTARON PASAJEROS EN EL SISTEMA. DESEA MANTENERLOS (S/N)? (SE GUARDARÁN AL FINAL DEL ARCHIVO CARGADO):")){
+		} else if(confirm("- SE DETECTARON PASAJEROS EN EL SISTEMA. DESEA MANTENERLOS (S/N)? (SE GUARDARAN AL FINAL DEL ARCHIVO CARGADO):")){
 			linkedListAux=ll_clone(pArrayListPassenger);
 			ll_clear(pArrayListPassenger);
 			printf("- REALIZANDO LECTURA...\n");
@@ -263,6 +263,7 @@ int controller_removePassenger(LinkedList* pArrayListPassenger)
 				Passenger_mostrarPasajero(pasajero);
 				if(pasajero!=NULL&&confirm("- CONFIRME BAJA DE PASAJERO(S/N).")){
 					Passenger_setIsEmpty(pasajero, 1);
+					retorno=0;
 					printf("- PASAJERO DADO DE BAJA SATISFACTORIAMENTE.\n");
 				} else {
 					printf("- BAJA CANCELADA.\n");

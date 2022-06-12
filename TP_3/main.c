@@ -31,7 +31,7 @@ int main()
         switch(option)
         {
             case 1:
-                salida=controller_loadFromText("data2.csv",listaPasajeros);
+                salida=controller_loadFromText("data.csv",listaPasajeros);
             	switch(salida){
 					case 0:
 						printf("- ARCHIVO CARGADO CORRECTAMENTE.\n");
@@ -80,7 +80,10 @@ int main()
             	}
             	break;
             case 5:
-            	controller_removePassenger(listaPasajeros);
+            	salida=controller_removePassenger(listaPasajeros);
+            	if(salida==-1){
+            		printf("- LISTA VACIA. CARGUE ALGUN PASAJERO Y REINTENTE\n");
+            	}
             	break;
             case 6:
             	salida=controller_ListPassenger(listaPasajeros);

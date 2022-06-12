@@ -69,7 +69,7 @@ int Passenger_mostrarPasajero(Passenger* this){
 	char nombre[50];
 	char apellido[50];
 	float precio;
-	int tipo;
+	char tipo[25];
 	char estado[25];
 	if(this!=NULL){
 		Passenger_getId(this, &id);
@@ -80,8 +80,8 @@ int Passenger_mostrarPasajero(Passenger* this){
 		printf("%-12s\t\t", nombre);
 		Passenger_getPrecio(this, &precio);
 		printf("%-8.2f\t\t", precio);
-		Passenger_getTipoPasajero(this, &tipo);
-		printf("%-4d\t\t", tipo);
+		Passenger_getTipoPasajeroStr(this, tipo);
+		printf("%-10s\t\t", tipo);
 		Passenger_getCodigoVuelo(this, codigo);
 		printf("%-9s\t\t", codigo);
 		Passenger_getEstadoVuelo(this, estado);
@@ -191,6 +191,42 @@ int Passenger_setTipoPasajero(Passenger* this,int tipoPasajero){
 	}
 	return retorno;
 }
+
+int Passenger_setTipoPasajeroStr(Passenger* this,char* tipoPasajero){
+	int retorno=-1;
+	if(this!=NULL&&tipoPasajero!=NULL){
+		if(strcmp(tipoPasajero, "FirstClass")==0){
+			this->tipoPasajero=1;
+			retorno=0;
+		} else if(strcmp(tipoPasajero, "ExecutiveClass")==0){
+			this->tipoPasajero=2;
+			retorno=0;
+		} else if(strcmp(tipoPasajero, "EconomyClass")==0){
+			this->tipoPasajero=3;
+			retorno=0;
+		}
+	}
+	return retorno;
+}
+
+int Passenger_getTipoPasajeroStr(Passenger* this, char* tipoPasajero){
+	int retorno=-1;
+	if(this!=NULL&&tipoPasajero!=NULL){
+		switch(this->tipoPasajero){
+		case 1:
+			strcpy(tipoPasajero,"FirstClass");
+			break;
+		case 2:
+			strcpy(tipoPasajero,"ExecutiveClass");
+			break;
+		case 3:
+			strcpy(tipoPasajero,"EconomyClass");
+			break;
+		}
+	}
+	return retorno;
+}
+
 int Passenger_getTipoPasajero(Passenger* this,int* tipoPasajero){
 	int retorno=-1;
 	if(this!=NULL){

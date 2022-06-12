@@ -11,6 +11,11 @@
 #include <string.h>
 #include <ctype.h>
 
+/**
+ * @brief Imprimite un mensaje y pide ingreso de S o N
+ * @param mensaje char* mensaje a mostrar
+ * @return -1 si error o [1 si S o 0 si N]
+ */
 int confirm(char mensaje[]) {
 	int retorno;
 	char respuesta;
@@ -35,12 +40,15 @@ int confirm(char mensaje[]) {
 
 	return retorno;
 }
-
+/**
+ * @brief Busca si un string es solo numeros
+ * @param string char* a recorrer
+ * @return 1 si es solo numero 0 si contiene algun caracter no numerico
+ */
 int stringIsInt(char string[]){
 	int retorno=1;
-	int i;
 	if(string!=NULL){
-		for(i=0;i<strlen(string)-1;i++){
+		for(int i=0;i<strlen(string)-1;i++){
 			if(isdigit(string[i])==0){
 				retorno=0;
 				break;
@@ -49,7 +57,14 @@ int stringIsInt(char string[]){
 	}
 	return retorno;
 }
-
+/**
+ * @brief Imprime un mensaje y permite el ingreso de un numero dentro de un rango
+ * @param mensaje char* mensaje a mostrar
+ * @param resultado int* donde guardar el resultado
+ * @param min int minimo
+ * @param max int maximo
+ * @return -1 si error (punteros nulos) o 0 si funciono
+ */
 int getPositiveInt(char mensaje[], int* resultado, int min, int max) {
 	char buffer[9];
 	int flagError;
@@ -74,6 +89,11 @@ int getPositiveInt(char mensaje[], int* resultado, int min, int max) {
 	return retorno;
 }
 
+/**
+ * @brief Busca si un string es solo numeros y contiene un solo punto
+ * @param string char* a recorrer
+ * @return 1 si es solo numero 0 si contiene algun caracter no numerico distino de punto o mas de dos puntos
+ */
 int stringIsFloat(char string[]){
 	int retorno=1;
 	int i;
@@ -93,13 +113,20 @@ int stringIsFloat(char string[]){
 	return retorno;
 }
 
+/**
+ * @brief Imprime un mensaje y permite el ingreso de un numero dentro de un rango
+ * @param mensaje char* mensaje a mostrar
+ * @param resultado float* donde guardar el resultado
+ * @param min int minimo
+ * @param max int maximo
+ * @return -1 si error (punteros nulos) o 0 si funciono
+ */
 int getPositiveFloat(char mensaje[], float* resultado, float min, float max) {
+	int retorno=-1;
 	char buffer[9];
 	int flagError;
-	int retorno;
 	float numero;
-	retorno = -1;
-	if(resultado != NULL && mensaje != NULL) {
+	if(resultado!= NULL&&mensaje!=NULL) {
 		do {
 			flagError=0;
 			printf("%s \n", mensaje);
@@ -117,6 +144,11 @@ int getPositiveFloat(char mensaje[], float* resultado, float min, float max) {
 	return retorno;
 }
 
+/**
+ * @brief Busca si un string es solo letras y espacio
+ * @param string char* a recorrer
+ * @return 1 si es solo letras 0 si contiene algun caracter no alfabetico distinto de espacios
+ */
 int stringIsAlphabetic(char string[]){
 	int retorno=1;
 	int i;
@@ -131,6 +163,13 @@ int stringIsAlphabetic(char string[]){
 	return retorno;
 }
 
+/**
+ * @brief Imiprime un mensaje y permite el ingreso de un texto alfabetico
+ * @param mensaje char* mensjae a mostrar
+ * @param destino char* donde se almacenara la respuesta
+ * @param len int largo de la cadena
+ * @return -1 si error(punteros nulos o largo no admitido) o 0 si funciono
+ */
 int getAlphabeticText(char mensaje[], char destino[], int len) {
 	int retorno;
 	int flagError;
@@ -151,6 +190,13 @@ int getAlphabeticText(char mensaje[], char destino[], int len) {
 	return retorno;
 }
 
+/**
+ * @brief Imiprime un mensaje y permite el ingreso de un texto alfanumerico
+ * @param mensaje char* mensjae a mostrar
+ * @param destino char* donde se almacenara la respuesta
+ * @param len int largo de la cadena
+ * @return -1 si error(punteros nulos o largo no admitido) o 0 si funciono
+ */
 int getAlphanumericText(char mensaje[], char destino[], int len) {
 	int retorno;
 	retorno=-1;
@@ -165,6 +211,11 @@ int getAlphanumericText(char mensaje[], char destino[], int len) {
 	return retorno;
 }
 
+/**
+ * @brief Busca si un string es una ruta valida
+ * @param string char* cadena a recorrer
+ * @return 1 si no encuentra espacios o 0 si contiene espacios
+ */
 int stringIsPath(char string[]){
 	int retorno=1;
 	int i;
@@ -179,6 +230,12 @@ int stringIsPath(char string[]){
 	return retorno;
 }
 
+/**
+ * @brief Recorre un string y lleva a mayusculas qty caracteres
+ * @param string char* string a recorrer
+ * @param qty cantidad de caracteres
+ * @return -1 si error (punteros nulos o cantidad fuera de rango) o 0 si funciono
+ */
 int stringToUpper(char* string, int qty){
 	int retorno=-1;
 	int i;

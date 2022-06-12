@@ -1,0 +1,202 @@
+id,name,lastname,price,flycode,typePassenger,statusFlight
+1,Yancy,Lumby,20443,L1H2I15,1,Aterrizado
+2,Federico,Huertas,15166,T2G6S95,1,Aterrizado
+3,Cherie,Sline,27833,B4N7F69,1,Aterrizado
+4,Rayner,Olcot,47344,Z6Z1G17,1,Demorado
+5,Mareah,Sorley,33867,R4E5X39,1,Demorado
+6,Truman,Wiggans,51965,W6Q7Y44,1,Demorado
+7,Fiona,Heifer,49949,I7T0K98,1,Demorado
+8,Bertha,Castlake,55489,O7E6E20,1,Demorado
+9,Maisie,Rhule,26742,D6X0L40,1,Demorado
+10,Gussie,McCulley,25562,N9J5M31,1,Demorado
+11,Timmie,Brunicke,18372,F1V4Z90,1,Aterrizado
+12,Faunie,Papaminas,27357,R4D5U29,1,En vuelo
+13,Ruttger,Parr,24147,W6Q9F84,1,Demorado
+14,Salvador,Woollends,39099,Q6T6V84,1,En vuelo
+15,Kathie,Kenshole,19313,C6Z7T34,1,Aterrizado
+16,Ole,Sighart,39651,L9G2K70,1,Demorado
+17,Jodie,Hanhart,31275,O5E8O11,1,Aterrizado
+18,Zaneta,Wisby,38269,G3I0H64,1,Demorado
+19,Ulrica,Wolfenden,49095,N5M8W71,1,Demorado
+20,Virgil,Styche,57376,P4S0H71,1,Aterrizado
+21,Israel,Lovekin,19868,H1X9C35,1,Demorado
+22,Rudd,Wippermann,47480,G6Z1I66,1,Aterrizado
+23,Carmelita,Cloutt,39375,O8L2Q04,1,Aterrizado
+24,Sax,Aylwin,11001,F9C0P56,1,En vuelo
+25,Ginni,Perago,10769,N0U2L92,1,Aterrizado
+26,Sigrid,Macrae,31568,I9I2I89,1,Aterrizado
+27,Hendrick,MacPhaden,15181,X2M7J84,1,Demorado
+28,Anatole,Shimon,40530,S0W0N26,1,Demorado
+29,Fifi,Phipson,27703,M9L2T27,1,Aterrizado
+30,Leonore,Selwyn,32690,C8T6U48,1,Aterrizado
+31,Sascha,Fahey,50078,N0S1Z57,1,En vuelo
+32,Freddi,Faveryear,44127,D3L4T22,1,Demorado
+33,Worden,Whitta,31576,W4H9H27,1,En vuelo
+34,Marguerite,Wibrow,21096,R3V9A23,1,Aterrizado
+35,Marten,Hazlehurst,15995,F6Z1C87,1,Demorado
+36,Koo,Climer,23640,T3T8G56,1,Demorado
+37,Noll,Brewood,24482,G2M6G93,1,En vuelo
+38,Patrizio,Spary,16791,R5H5D87,1,En vuelo
+39,Mignon,Shales,31331,W7O5B75,1,Aterrizado
+40,Lindsy,Krystof,25678,G5G1E42,1,Aterrizado
+41,Ania,Margeram,38841,A0X3Y44,1,Aterrizado
+42,Jonathon,Swadlen,47432,N2D3I19,1,Aterrizado
+43,Rowena,Guillou,58162,Y0I4R05,1,Demorado
+44,Jervis,Hinckley,17869,Z8G6N66,1,Demorado
+45,Waldemar,Lowry,10080,J0X8H32,1,En vuelo
+46,Manya,Hegdonne,59628,Q6J9V92,1,En vuelo
+47,Janette,Izatson,59835,L7J7A62,1,Aterrizado
+48,Nan,Wingham,37159,B4J7X35,1,Aterrizado
+49,Dorita,Fawthorpe,17097,A2M2A52,1,En vuelo
+50,Oliver,Fattorini,26085,O3S6O39,1,Aterrizado
+51,Jamey,Thomann,27781,T2J6R24,1,En vuelo
+52,Vonni,Overthrow,24983,T0R5Z47,1,En vuelo
+53,Angeli,Maleham,39621,F7L7D26,1,Aterrizado
+54,Ellie,Bythell,16828,C2L3V85,1,Demorado
+55,Carlin,Dewane,55843,Q3Y5U74,1,En vuelo
+56,Willie,Climson,10279,G6J7H26,1,En vuelo
+57,Clemence,Ruddlesden,18770,H2E6X45,1,En vuelo
+58,June,Moraleda,10837,O4Y6K33,1,Aterrizado
+59,Bartram,Macci,55784,O1N0Q19,1,Demorado
+60,Rowland,Hatz,41339,D1E6P66,1,En vuelo
+61,Alexis,Drysdale,18382,B6A8H73,1,Aterrizado
+62,Wayne,Bigley,37911,Q7M1J02,1,En vuelo
+63,Shannah,Wank,30337,Y0L9Z66,1,En vuelo
+64,Levi,Hanne,17988,Z0Z3Q28,1,Aterrizado
+65,Ossie,Hutcheons,28521,P7F3I29,1,Demorado
+66,Travers,Tal,58332,T7I5N94,1,Aterrizado
+67,Willi,Kordova,23410,D5P7B79,1,En vuelo
+68,Faun,Fishleigh,47161,I8F5S95,1,Demorado
+69,Sholom,Balsdon,33723,N1K2W45,1,En vuelo
+70,Nancie,Penquet,12461,N9M5K56,1,En vuelo
+71,Elisabetta,Burfitt,17780,P9I0E31,1,Demorado
+72,Dannel,Boscher,52124,Y1M5R73,1,Demorado
+73,Marylin,Doncaster,27525,J0E7M95,1,En vuelo
+74,Ashlen,Sandison,52950,C2R5C31,1,En vuelo
+75,Maggy,Selburn,38537,A5G7F60,1,Demorado
+76,Kevina,Cinderey,39650,C6D0O19,1,Demorado
+77,Devonna,Hurley,42390,G3Z1K14,1,Demorado
+78,Justin,Denys,32354,G1M0G53,1,Aterrizado
+79,Gerhard,Pagram,40161,D9O5F53,1,Aterrizado
+80,Hadleigh,Grim,33129,F8L6D03,1,Demorado
+81,Vivianna,Rhelton,43851,V4A8J53,1,Demorado
+82,Beryle,Beetham,56914,H3Q6U39,1,Demorado
+83,Betti,Kindleside,30955,A1Q2O25,1,En vuelo
+84,Kira,Vellacott,19072,X3N0M66,1,En vuelo
+85,Dominick,McCartan,23954,A2E1F63,1,Aterrizado
+86,Roland,Millott,38219,S9U2C50,1,En vuelo
+87,Linnie,Dybald,45381,M3Z9C55,1,Aterrizado
+88,Charin,Burgiss,26751,C8I0I66,1,Demorado
+89,Leena,Romand,30533,U2R3X86,1,Aterrizado
+90,Bobbye,Wolfendell,28207,Q2O1G62,1,Aterrizado
+91,Bess,Kornacki,17707,A3H7C91,1,Aterrizado
+92,Alfonso,Towle,28722,L8R1D09,1,En vuelo
+93,Byran,Blamey,43287,C5O6Z85,1,Demorado
+94,Leif,Ricoald,56621,I4B6L21,1,Demorado
+95,Meara,Beaford,50584,E9Q6C76,1,Demorado
+96,Celene,Tibbs,16315,B2P4K31,1,En vuelo
+97,Elnar,Doles,11143,L9J9H79,1,En vuelo
+98,Haleigh,Scading,49170,M6B5B41,1,En vuelo
+99,Tally,Spencer,42819,B5Y5Q91,1,Aterrizado
+100,Filip,Gibbeson,29440,M3S1Z19,1,Demorado
+101,Bonny,Staries,56529,D3B4A06,1,Demorado
+102,Gerrard,Clawsley,47687,Q7U5M32,1,Demorado
+103,Aube,Bernocchi,47884,M0I2G82,1,Aterrizado
+104,Jozef,Bagg,15215,R9E4B70,1,En vuelo
+105,Pembroke,Bevis,54373,W7S3X01,1,En vuelo
+106,Phyllis,Bielfeldt,47192,P4G6R23,1,Demorado
+107,Valli,Hirth,30934,K6M5Y49,1,Aterrizado
+108,Vernon,Tonn,34825,B4R1W08,1,Demorado
+109,Terrye,Butterly,35869,N2E9I10,1,Aterrizado
+110,Birch,Pay,11795,B9G2L87,1,Aterrizado
+111,Thorvald,Carbin,23085,G2D3Z20,1,Aterrizado
+112,Eloise,Mc Ilwrick,18952,P7R1T07,1,Demorado
+113,Mariana,Evison,57871,Q9K1G74,1,En vuelo
+114,Iggy,Kemmis,17977,F2O8E38,1,En vuelo
+115,Elias,Thalmann,21420,K8R6X55,1,En vuelo
+116,Marlena,Fellgatt,31297,Y8A6O34,1,Aterrizado
+117,Stanly,Braban,46189,P3J9R79,1,Demorado
+118,Cindi,Gheorghescu,23163,E9I8Z25,1,Aterrizado
+119,Peri,Mallen,31874,O3C4O69,1,En vuelo
+120,Alfred,Rijkeseis,29690,R6O7Y78,1,Demorado
+121,Hubey,Winridge,55765,A0B2T55,1,Demorado
+122,Mathe,Bethell,53915,N0C0T18,1,Aterrizado
+123,Anstice,De Blasio,33641,O6C5Y87,1,Demorado
+124,Paula,Hannond,31306,U7X4P31,1,Aterrizado
+125,Magda,Joselson,16611,J6W1Y90,1,Aterrizado
+126,Brok,Egginson,54604,X9F8X91,1,Demorado
+127,Amelie,Fitzer,51668,H3Z5S04,1,En vuelo
+128,Arthur,Menichelli,12658,F3P3Q23,1,Aterrizado
+129,Cloe,Denziloe,21740,U8X5N33,1,Demorado
+130,Sharl,Di Lucia,29341,J1H0F35,1,Aterrizado
+131,Reggie,Escritt,21885,Y5T0X07,1,En vuelo
+132,Mohammed,Attreed,22798,Z8R8P59,1,Demorado
+133,Natale,Eates,15787,Y3A4R87,1,Aterrizado
+134,Dick,Korneluk,29002,Y9Q8C31,1,En vuelo
+135,Ryan,Blinman,13162,K9Z7A43,1,En vuelo
+136,Conn,Eldritt,19268,A6L1A71,1,En vuelo
+137,Morlee,Barkley,20980,G4W9Q87,1,Demorado
+138,Morie,Cremer,10438,H2A6Z40,1,En vuelo
+139,Hubert,Fogg,30301,A6I1T43,1,En vuelo
+140,Charmane,Whiscard,15995,E9M9R81,1,Aterrizado
+141,Katleen,Kirkwood,30762,Z7E8H57,1,Aterrizado
+142,Simonette,Wollen,56122,Z6S3Z24,1,Demorado
+143,Jakie,Grummitt,49508,G1F1J34,1,Demorado
+144,Filia,Rouke,45461,Z4A5M59,1,En vuelo
+145,Bevvy,Eslie,45475,P1S1K11,1,Aterrizado
+146,Debera,Shuttell,35471,Y2N3I82,1,Demorado
+147,Stan,Andryszczak,50424,E0H5S84,1,Demorado
+148,Sibbie,O'Currane,48748,T9J6K57,1,Aterrizado
+149,Piotr,Bartol,52724,Q7L7Q87,1,En vuelo
+150,Annabella,O'Henery,26394,Z7X8Z55,1,En vuelo
+151,Jasun,Cosgrive,11797,T6U0B28,1,Demorado
+152,Elonore,Iacovuzzi,55832,I1G4U94,1,Aterrizado
+153,Dom,Elcombe,43647,A5Y7W13,1,Demorado
+154,Bevvy,Lewsley,16908,I8Z0M01,1,Aterrizado
+155,Chevy,Cheale,16439,A9B5K78,1,En vuelo
+156,Nariko,Mouncher,56751,H3E4K00,1,Demorado
+157,Bertina,Cardwell,57607,J9I5J25,1,En vuelo
+158,Darda,Coldham,45218,V3H3R14,1,Aterrizado
+159,Faydra,Sleightholm,40772,Q5H7Z59,1,En vuelo
+160,Lawry,Sterrick,15131,W5K7W52,1,Demorado
+161,Feliza,Pinches,59082,I4H6U70,1,Demorado
+162,Roxy,Drage,56623,U9G7W69,1,En vuelo
+163,Tracey,Hollyer,42917,C6Y9P51,1,En vuelo
+164,Annie,Pirdy,17010,V2W6E37,1,Aterrizado
+165,Meg,McCollum,19563,U3T7B41,1,Aterrizado
+166,Doloritas,McTeggart,18775,Z5Q4R89,1,En vuelo
+167,Philomena,Piller,58378,P1S9P01,1,En vuelo
+168,Martica,Edel,38234,J0X9S68,1,Demorado
+169,Jobie,Sille,34516,Q1S3X18,1,Aterrizado
+170,Rafaela,Brokenshaw,37444,L3O5A56,1,En vuelo
+171,Genni,Wallis,31151,C7P7P75,1,En vuelo
+172,Keene,Roddick,50096,W2T4X34,1,Demorado
+173,Derwin,Timlin,21673,U0R9A48,1,Aterrizado
+174,Rodolphe,Kingerby,30828,M7F6W00,1,En vuelo
+175,Valery,Rossiter,51137,B4U9V24,1,Demorado
+176,Sully,Postlethwaite,20458,V3H3F84,1,Demorado
+177,Maddy,L'Archer,26042,M3Y6W41,1,Aterrizado
+178,Constancia,Stood,22675,H0U8M62,1,Demorado
+179,Nessie,Westhoff,41458,E7Q7F93,1,Aterrizado
+180,Ilaire,Matthewes,35804,G5L8F50,1,Demorado
+181,Claude,Jouhning,15941,W1P9O10,1,En vuelo
+182,Randa,Wilden,21661,F0E3N22,1,En vuelo
+183,Hildy,Fogarty,59985,H1B7F55,1,Aterrizado
+184,Sheila-kathryn,Blankau,46847,Q3T6K92,1,Demorado
+185,Cross,Bullingham,56043,G6M0R99,1,En vuelo
+186,Davis,Kryszkiecicz,58751,C4W0U85,1,Demorado
+187,Brien,Barenski,54631,D1Y8I22,1,Aterrizado
+188,Hunfredo,Hayller,12643,U6O9M97,1,Demorado
+189,Pauly,Leddie,41892,O5L9S59,1,En vuelo
+190,Farrah,Cawdron,11226,P7K7W48,1,Demorado
+191,Anjanette,Degnen,40456,J4M6U13,1,Demorado
+192,Annadiane,Gozzett,52694,A5T2K99,1,En vuelo
+193,Sherlock,Francais,14118,M7Z5D25,1,En vuelo
+194,Ashley,Elacoate,36792,W0P2W13,1,Aterrizado
+195,Belvia,Bows,34620,R8W3P36,1,En vuelo
+196,Maighdiln,Witherspoon,43170,C8N2N00,1,Demorado
+197,Fran,Boath,25631,P8W7B35,1,Demorado
+198,Kandace,Bourcq,33861,Z2A2L82,1,Aterrizado
+199,Carolin,Littleton,19193,U6T0L11,1,Demorado
+200,Jdavie,Riddlesden,10050,U6N5K67,1,Aterrizado
+201,HOLA,APEEE,50000,12312D1,1,Aterrizado

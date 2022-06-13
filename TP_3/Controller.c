@@ -16,7 +16,7 @@ int controller_getMaximoId(LinkedList* pArrayListPassenger){
 	int maxId=0;
 	int actualId;
 	for(int i=0;i<ll_len(pArrayListPassenger);i++){
-		pasajero=ll_get(pArrayListPassenger, i);
+		pasajero=(Passenger*) ll_get(pArrayListPassenger, i);
 		if(pasajero==NULL){
 			retorno=-1;
 			break;
@@ -63,7 +63,7 @@ int controller_mergeLinkedList(LinkedList* list1, LinkedList* list2){
 	if(list1!=NULL&&list2!=NULL){
 		nextId=controller_getNextId(list1);
 		for(int i=0;i<ll_len(list2);i++){
-			pasajero=ll_get(list2, i);
+			pasajero=(Passenger*)ll_get(list2, i);
 			Passenger_setId(pasajero, nextId);
 			ll_push(list1, ll_len(list1), pasajero);
 			nextId++;
@@ -204,7 +204,7 @@ int controller_editPassenger(LinkedList* pArrayListPassenger)
 		getPositiveInt("- INGRESE ID A BUSCAR: ", &id, 0, maxId);
 		indice=Passenger_getPassengerById(pArrayListPassenger, id);
 		if(indice!=-1){
-			pasajero=ll_get(pArrayListPassenger, indice);
+			pasajero=(Passenger*)ll_get(pArrayListPassenger, indice);
 			if(pasajero!=NULL&&!Passenger_getIsEmpty(pasajero)){
 				do{
 					retorno=Passenger_mostrarPasajero(pasajero);
@@ -258,7 +258,7 @@ int controller_removePassenger(LinkedList* pArrayListPassenger)
 		do{
 			getPositiveInt("- INGRESE ID DE PASAJERO A BUSCAR: ", &id, 0, ll_len(pArrayListPassenger));
 			indice=Passenger_getPassengerById(pArrayListPassenger, id);
-			pasajero=ll_get(pArrayListPassenger, indice);
+			pasajero=(Passenger*)ll_get(pArrayListPassenger, indice);
 			if(indice!=-1&&!Passenger_getIsEmpty(pasajero)){
 				Passenger_mostrarPasajero(pasajero);
 				if(pasajero!=NULL&&confirm("- CONFIRME BAJA DE PASAJERO(S/N).")){
@@ -292,7 +292,7 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger)
     	len=ll_len(pArrayListPassenger);
     	Passenger_printHeader(len);
 		for(int i=0;i<len;i++){
-			pasajero=ll_get(pArrayListPassenger,i);
+			pasajero=(Passenger*)ll_get(pArrayListPassenger,i);
 			if(!Passenger_getIsEmpty(pasajero)){
 				Passenger_mostrarPasajero(pasajero);
 			}

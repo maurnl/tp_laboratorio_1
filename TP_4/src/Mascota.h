@@ -20,7 +20,7 @@ typedef struct{
 
 #endif /* MASCOTA_H_ */
 
-Mascota* Mascota_new();
+Mascota* Mascota_new(); // Encapsula el malloc
 Mascota* Mascota_newParametros(int id, char* nombre,char* apellidoDuenio,int edad,int vacunasAplicadas,int estaEsterilizado,int costoTratamiento);
 void Mascota_delete(Mascota* this);
 
@@ -47,10 +47,12 @@ int Mascota_getCostoTratamiento(Mascota* this, int* costoTratamiento);
 
 int Mascota_mostrarMascota(Mascota* this);
 int Mascota_getIndexById(LinkedList* pArrayListMascota, int id);
+// Sort
 int Mascota_compareById(void* arg1, void* arg2);
 int Mascota_compareByName(void* arg1, void* arg2);
+// Map
 void Mascota_mapCosto(void* arg);
-
+// Filter
 int Mascota_filtrarPorEsterilizado(void* arg);
 int Mascota_filtrarPorTodasLasVacunas(void* arg);
 int Mascota_filtrarPorCostoAlto(void* arg);

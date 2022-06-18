@@ -10,7 +10,7 @@
 /**
  * @brief Funcion para control de menu
  * @param flagSave bandera para evitar salir sin guardar
- * @return
+ * @return int la opcion elegida
  */
 int menu(int* flagSave){
 	int opcion=-1;

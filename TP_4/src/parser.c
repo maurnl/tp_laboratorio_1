@@ -6,10 +6,10 @@
 #include "menu.h"
 #include "Controller.h"
 
-/** \brief Parsea los datos los datos de los pasajeros desde el archivo data.csv (modo texto).
+/** \brief Parsea los datos los datos de las mascotas desde el archivo data.csv (modo texto).
  *
  * \param path char*
- * \param pArrayListPassenger LinkedList*
+ * \param pArrayListMascotas LinkedList*
  * \return int
  *
  */
@@ -37,10 +37,10 @@ int parser_MascotaFromText(FILE* pArchivo, LinkedList* pArrayListMascotas)
     return retorno;
 }
 
-/** \brief Parsea los datos de los pasajeros desde el archivo data.bin (modo binario).
+/** \brief Parsea los datos de las mascotas desde el archivo 'path' (modo binario).
  *
  * \param path char*
- * \param pArrayListPassenger LinkedList*
+ * \param pArrayListMascotas LinkedList*
  * \return int
  *
  */
@@ -67,9 +67,9 @@ int parser_MascotaFromBinary(FILE* pArchivo , LinkedList* pArrayListMascotas)
     return retorno;
 }
 /**
- * @brief Guarda los datos de una lista de pasajeros en modo binario
+ * @brief Guarda los datos de una lista de mascotas en modo binario
  * @param pArchivo Puntero a archivo
- * @param pArrayListPassenger LinkedList*
+ * @param pArrayListMascotas LinkedList*
  * @return
  */
 int parser_saveMascotasAsBinary(FILE* pArchivo, LinkedList* pArrayListMascotas){
@@ -88,9 +88,9 @@ int parser_saveMascotasAsBinary(FILE* pArchivo, LinkedList* pArrayListMascotas){
 }
 
 /**
- * @brief Guarda los datos de una lista de pasajeros en modo texto
+ * @brief Guarda los datos de una lista de mascotas en modo texto
  * @param pArchivo Puntero a archivo
- * @param pArrayListPassenger LinkedList*
+ * @param pArrayListMascotas LinkedList*
  * @return
  */
 int parser_saveMascotasAsText(FILE* pArchivo, LinkedList* pArrayListMascotas){

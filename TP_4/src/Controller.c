@@ -14,7 +14,7 @@
 #include "utn.h"
 /**
  * @brief Obtiene el id máximo de una linkedlist
- * @param LinkedList* pArrayListPassenger
+ * @param LinkedList* pArrayListMascotas
  * @return
  */
 int controller_getMaximoId(LinkedList* pArrayListMascotas){
@@ -33,7 +33,7 @@ int controller_getMaximoId(LinkedList* pArrayListMascotas){
 
 /**
  * @brief Obtiene el siguiente ID a utilizar para una linkedlist
- * @param LinkedList* pArrayListPassenger
+ * @param LinkedList* pArrayListMascotas
  * @return
  */
 int controller_getNextId(LinkedList* pArrayListMascotas){
@@ -73,10 +73,10 @@ int controller_mergeLinkedList(LinkedList* list1, LinkedList* list2){
 	return retorno;
 }
 
-/** \brief Carga los datos de los pasajeros desde el archivo data.csv (modo texto).
+/** \brief Carga los datos de las mascotas desde el archivo en 'path' (modo texto).
  *
  * \param path char*
- * \param pArrayListPassenger LinkedList*
+ * \param pArrayListMascotas LinkedList*
  * \return int
  *
  */
@@ -108,10 +108,10 @@ int controller_loadFromText(char* path, LinkedList* pArrayListMascotas)
 	return retorno;
 }
 
-/** \brief Carga los datos de los pasajeros desde el archivo data.bin (modo binario).
+/** \brief Carga los datos de los pasajeros desde el archivo 'path' (modo binario).
  *
  * \param path char*
- * \param pArrayListPassenger LinkedList*
+ * \param pArrayListMascotas LinkedList*
  * \return int
  *
  */
@@ -143,10 +143,10 @@ int controller_loadFromBinary(char* path, LinkedList* pArrayListMascotas)
 	return retorno;
 }
 
-/** \brief Alta de pasajero
+/** \brief Alta de mascotas
  *
  * \param path char*
- * \param pArrayListPassenger LinkedList*
+ * \param pArrayListMascotas LinkedList*
  * \return int
  *
  */
@@ -178,10 +178,10 @@ int controller_addMascota(LinkedList* pArrayListMascotas,int* id)
     return retorno;
 }
 
-/** \brief Modificar datos de pasajero
+/** \brief Modificar datos de mascota
  *
  * \param path char*
- * \param pArrayListPassenger LinkedList*
+ * \param pArrayListMascotas LinkedList*
  * \return int
  *
  */
@@ -240,7 +240,7 @@ int controller_editMascota(LinkedList* pArrayListMascotas)
 /** \brief Baja de pasajero
  *
  * \param path char*
- * \param pArrayListPassenger LinkedList*
+ * \param pArrayListMascotas LinkedList*
  * \return int
  *
  */
@@ -274,10 +274,10 @@ int controller_removeMascota(LinkedList* pArrayListMascotas)
 	return retorno;
 }
 
-/** \brief Listar pasajeros
+/** \brief Listar mascotas
  *
  * \param path char*
- * \param pArrayListPassenger LinkedList*
+ * \param pArrayListMascotas LinkedList*
  * \return int
  *
  */
@@ -298,10 +298,10 @@ int controller_ListMascota(LinkedList* pArrayListMascotas)
 	return retorno;
 }
 
-/** \brief Ordenar pasajeros
+/** \brief Ordenar mascotas
  *
  * \param path char*
- * \param pArrayListPassenger LinkedList*
+ * \param pArrayListMascotas LinkedList*
  * \return int
  *
  */
@@ -383,41 +383,41 @@ int controller_filterMascota(LinkedList* pArrayListMascotas){
 	return retorno;
 }
 
-/** \brief Guarda los datos de los pasajeros en el archivo data.csv (modo texto).
+/** \brief Guarda los datos de las mascotas en el archivo 'path' (modo texto).
  *
  * \param path char*
- * \param pArrayListPassenger LinkedList*
+ * \param pArrayListMascotas LinkedList*
  * \return int
  *
  */
-int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)
+int controller_saveAsText(char* path , LinkedList* pArrayListMascotas)
 {
 	int retorno=-2;
 	FILE* pArchivo;
 	pArchivo=fopen(path,"w");
-	if(pArchivo!=NULL&&stringIsPath(path)&&pArrayListPassenger!=NULL){
+	if(pArchivo!=NULL&&stringIsPath(path)&&pArrayListMascotas!=NULL){
 			printf("- REALIZANDO ESCRITURA...\n");
-			retorno=parser_saveMascotasAsText(pArchivo, pArrayListPassenger);
+			retorno=parser_saveMascotasAsText(pArchivo, pArrayListMascotas);
 	}
 	fclose(pArchivo);
     return retorno;
 }
 
-/** \brief Guarda los datos de los pasajeros en el archivo data.bin (modo binario).
+/** \brief Guarda los datos de las mascotas en el archivo 'path' (modo binario).
  *
  * \param path char*
- * \param pArrayListPassenger LinkedList*
+ * \param pArrayListMascotas LinkedList*
  * \return int
  *
  */
-int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
+int controller_saveAsBinary(char* path , LinkedList* pArrayListMascotas)
 {
 	int retorno=-2;
 	FILE* pArchivo;
 	pArchivo=fopen(path,"wb");
-	if(pArchivo!=NULL&&stringIsPath(path)&&pArrayListPassenger!=NULL){
+	if(pArchivo!=NULL&&stringIsPath(path)&&pArrayListMascotas!=NULL){
 		printf("- REALIZANDO ESCRITURA...\n");
-		retorno=parser_saveMascotasAsBinary(pArchivo, pArrayListPassenger);
+		retorno=parser_saveMascotasAsBinary(pArchivo, pArrayListMascotas);
 	}
 	fclose(pArchivo);
     return retorno;

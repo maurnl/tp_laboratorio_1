@@ -12,6 +12,10 @@
 #include "Mascota.h"
 #include "utn.h"
 
+/**
+ * Retorna un puntero a una nueva entidad Mascota en memoria dinamica
+ * @return NULL si no hay memoria disponible o Mascota* Puntero a Mascota si funciono
+ */
 Mascota* Mascota_new(){
 	Mascota* mascotaBuff=NULL;
 	mascotaBuff=(Mascota*) malloc(sizeof(Mascota));
@@ -29,7 +33,17 @@ Mascota* Mascota_new(){
 	}
 	return mascotaBuff;
 }
-
+/**
+ * Retorna un puntero a una nueva entidad Mascota en memoria dinamica
+ * @param id int
+ * @param nombre char*
+ * @param apellidoDuenio char*
+ * @param edad int
+ * @param vacunasAplicadas int
+ * @param estaEsterilizado int
+ * @param costoTratamiento int
+ * @return NULL si no hay memoria disponible o Mascota* Puntero a Mascota si funciono
+ */
 Mascota* Mascota_newParametros(int id, char* nombre,char* apellidoDuenio,int edad,int vacunasAplicadas,int estaEsterilizado,int costoTratamiento){
 	Mascota* mascotaBuff=NULL;
 	mascotaBuff=Mascota_new();
@@ -46,13 +60,20 @@ Mascota* Mascota_newParametros(int id, char* nombre,char* apellidoDuenio,int eda
 	}
 	return mascotaBuff;
 }
-
+/**
+ * Libera la memoria ocupada por un puntero a estructura Mascota en memoria dinamica
+ * @param this Mascota* puntero a mascota
+ */
 void Mascota_delete(Mascota* this){
 	if(this!=NULL){
 		free(this);
 	}
 }
-
+/**
+ * Muesta la informacion de una mascota
+ * @param this Mascota* puntero a mascota
+ * @return -1 si puntero NULL o 0 si funciono
+ */
 int Mascota_mostrarMascota(Mascota* this){
 	int retorno=-1;
 	int id;
@@ -85,7 +106,12 @@ int Mascota_mostrarMascota(Mascota* this){
 	}
 	return retorno;
 }
-
+/**
+ * Busca una mascota por id y retorna el indice donde se encuentra
+ * @param pArrayListMascota LinkedList* puntero a LinkedList
+ * @param id int id a buscar
+ * @return -1 si puntero a NULL o el indice si funciono
+ */
 int Mascota_getIndexById(LinkedList* pArrayListMascota, int id){
 	int retorno=-1;
 	int idAux;
@@ -219,7 +245,12 @@ int Mascota_getEstaEsterilizado(Mascota* this, int* estaEsterilizado){
 	}
 	return retorno;
 }
-
+/**
+ * Funcion criterio. Compara dos mascotas por id
+ * @param arg1 void*
+ * @param arg2 void*
+ * @return 0 si error (punteros NULL) o 1 si id de arg1 es mayor que id de arg2 o -1 si id de arg2 es mayor que id de arg1
+ */
 int Mascota_compareById(void* arg1, void* arg2){
 	int retorno=0;
 	int idArg1, idArg2;
@@ -234,7 +265,12 @@ int Mascota_compareById(void* arg1, void* arg2){
 	}
 	return retorno;
 }
-
+/**
+ * Funcion criterio. Compara dos mascotas por nombre
+ * @param arg1 void*
+ * @param arg2 void*
+ * @return 0 si error (punteros NULL) o 1 si nombre de arg1 es mayor que nombre de arg2 o -1 si nombre de arg2 es mayor que nombre de arg1
+ */
 int Mascota_compareByName(void* arg1, void* arg2){
 	int retorno=0;
 	char nombre1[50], nombre2[50];
@@ -249,7 +285,10 @@ int Mascota_compareByName(void* arg1, void* arg2){
 	}
 	return retorno;
 }
-
+/**
+ * Funcion map. Calcula el campo costoTratamiento de Mascota
+ * @param arg Mascota*
+ */
 void Mascota_mapCosto(void* arg){
 	Mascota* this=(Mascota*)arg;
 	int vacunas, esterilizado;
@@ -257,7 +296,11 @@ void Mascota_mapCosto(void* arg){
 	Mascota_getEstaEsterilizado(this, &esterilizado);
 	Mascota_setCostoTratamiento(this, vacunas*2500 + esterilizado*4000);
 }
-
+/**
+ * Funcion filtro. Campo estaEsterilizado=1
+ * @param arg Mascota*
+ * @return 0 si puntero NULL o -1 si no cumple criterio o 1 si cumple criterio
+ */
 int Mascota_filtrarPorEsterilizado(void* arg){
 	int retorno=-1;
 	int esterilizado;
@@ -269,7 +312,11 @@ int Mascota_filtrarPorEsterilizado(void* arg){
 	}
 	return retorno;
 }
-
+/**
+ * Funcion filtro. Campo vacunasAplicadas>2
+ * @param arg Mascota*
+ * @return 0 si puntero NULL o -1 si no cumple criterio o 1 si cumple criterio
+ */
 int Mascota_filtrarPorTodasLasVacunas(void* arg){
 	int retorno=-1;
 	int vacunas;
@@ -281,7 +328,11 @@ int Mascota_filtrarPorTodasLasVacunas(void* arg){
 	}
 	return retorno;
 }
-
+/**
+ * Funcion filtro. Campo costoTratamiento>10000
+ * @param arg Mascota*
+ * @return 0 si puntero NULL o -1 si no cumple criterio o 1 si cumple criterio
+ */
 int Mascota_filtrarPorCostoAlto(void* arg){
 	int retorno=-1;
 	int costo;

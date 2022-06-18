@@ -319,7 +319,7 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger)
 		getPositiveInt("CRITERIOS:\n- 1. POR ID.\n- 2. POR NOMBRE.\n INGRESE CRITERIO:", &opcion,1,2);
 		if(opcion==1){
 			pFuncion=Passenger_compareById;
-		} else if(opcion==2){
+		} else {
 			pFuncion=Passenger_compareByLastName;
 		}
 		// 1:Ascendiente
@@ -328,7 +328,7 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger)
 		if(opcion==1){
 			printf("- ORDENANDO PASAJEROS PORFAVOR ESPERE...\n");
 			retorno=ll_sort(pArrayListPassenger, pFuncion, 1);
-		} else if(opcion==2){
+		} else {
 			printf("- ORDENANDO PASAJEROS PORFAVOR ESPERE...\n");
 			retorno=ll_sort(pArrayListPassenger, pFuncion, 0);
 		}

@@ -7,6 +7,5 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger);
 int controller_sortPassenger(LinkedList* pArrayListPassenger);
 int controller_saveAsText(char* path , LinkedList* pArrayListPassenger);
 int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger);
-
 int controller_getNextId(LinkedList* pArrayListPassenger);
 int controller_mergeLinkedList(LinkedList* list1, LinkedList* list2);

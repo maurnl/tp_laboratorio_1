@@ -286,7 +286,7 @@ int Passenger_getIsEmpty(Passenger* this){
 	return retorno;
 }
 
-int Passenger_sortById(void* arg1, void* arg2){
+int Passenger_compareById(void* arg1, void* arg2){
 	int retorno=0;
 	int idArg1, idArg2;
 	if(arg1!=NULL&&arg2!=NULL){
@@ -301,7 +301,7 @@ int Passenger_sortById(void* arg1, void* arg2){
 	return retorno;
 }
 
-int Passenger_sortByLastName(void* arg1, void* arg2){
+int Passenger_compareByLastName(void* arg1, void* arg2){
 	int retorno=0;
 	char apellido1[50], apellido2[50];
 	if(arg1!=NULL&&arg2!=NULL){

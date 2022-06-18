@@ -55,7 +55,7 @@ int Passenger_getIsEmpty(Passenger* this);
 int Passenger_mostrarPasajero(Passenger* this);
 void Passenger_printHeader(int qty);
 int Passenger_getPassengerById(LinkedList* pArrayListPassenger, int id);
-int Passenger_sortById(void* arg1, void* arg2);
-int Passenger_sortByLastName(void* arg1, void* arg2);
+int Passenger_compareById(void* arg1, void* arg2);
+int Passenger_compareByLastName(void* arg1, void* arg2);
 
 #endif /* PASSENGER_H_ */

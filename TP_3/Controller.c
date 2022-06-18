@@ -262,7 +262,8 @@ int controller_removePassenger(LinkedList* pArrayListPassenger)
 			if(indice!=-1&&!Passenger_getIsEmpty(pasajero)){
 				Passenger_mostrarPasajero(pasajero);
 				if(pasajero!=NULL&&confirm("- CONFIRME BAJA DE PASAJERO(S/N).")){
-					Passenger_setIsEmpty(pasajero, 1);
+					//Passenger_setIsEmpty(pasajero, 1);
+					ll_remove(pArrayListPassenger, indice);
 					retorno=0;
 					printf("- PASAJERO DADO DE BAJA SATISFACTORIAMENTE.\n");
 				} else {
@@ -317,9 +318,9 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger)
 	if(pArrayListPassenger!=NULL&&!ll_isEmpty(pArrayListPassenger)){
 		getPositiveInt("CRITERIOS:\n- 1. POR ID.\n- 2. POR NOMBRE.\n INGRESE CRITERIO:", &opcion,1,2);
 		if(opcion==1){
-			pFuncion=Passenger_sortById;
+			pFuncion=Passenger_compareById;
 		} else if(opcion==2){
-			pFuncion=Passenger_sortByLastName;
+			pFuncion=Passenger_compareByLastName;
 		}
 		// 1:Ascendiente
 		// 0:Descendiente

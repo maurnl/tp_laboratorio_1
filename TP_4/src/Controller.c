@@ -237,7 +237,7 @@ int controller_editMascota(LinkedList* pArrayListMascotas)
     return retorno;
 }
 
-/** \brief Baja de pasajero
+/** \brief Baja de mascota
  *
  * \param path char*
  * \param pArrayListMascotas LinkedList*

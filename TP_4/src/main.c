@@ -1,8 +1,8 @@
 /*
  ============================================================================
  Name        : TP_4.c
- Author      : 
- Version     :
+ Author      : Mauro Luciano (DIV J)
+ Version     : la que anda
  Copyright   : Your copyright notice
  Description : Hello World in C, Ansi-style
  ============================================================================

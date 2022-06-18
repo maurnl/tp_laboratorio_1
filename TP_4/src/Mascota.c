@@ -252,14 +252,19 @@ int Mascota_compareByName(void* arg1, void* arg2){
 
 void Mascota_mapCosto(void* arg){
 	Mascota* this=(Mascota*)arg;
-	this->costoTratamiento=this->vacunasAplicadas*2500 + this->estaEsterilizado*4000;
+	int vacunas, esterilizado;
+	Mascota_getVacunasAplicadas(this, &vacunas);
+	Mascota_getEstaEsterilizado(this, &esterilizado);
+	Mascota_setCostoTratamiento(this, vacunas*2500 + esterilizado*4000);
 }
 
 int Mascota_filtrarPorEsterilizado(void* arg){
 	int retorno=-1;
+	int esterilizado;
 	if(arg!=NULL){
 		retorno=0;
-		if(((Mascota*)arg)->estaEsterilizado)
+		Mascota_getEstaEsterilizado((Mascota*)arg, &esterilizado);
+		if(esterilizado)
 			retorno=1;
 	}
 	return retorno;
@@ -267,9 +272,11 @@ int Mascota_filtrarPorEsterilizado(void* arg){
 
 int Mascota_filtrarPorTodasLasVacunas(void* arg){
 	int retorno=-1;
+	int vacunas;
 	if(arg!=NULL){
 		retorno=0;
-		if(((Mascota*)arg)->vacunasAplicadas>2)
+		Mascota_getVacunasAplicadas((Mascota*)arg, &vacunas);
+		if(vacunas>2)
 			retorno=1;
 	}
 	return retorno;
@@ -277,9 +284,11 @@ int Mascota_filtrarPorTodasLasVacunas(void* arg){
 
 int Mascota_filtrarPorCostoAlto(void* arg){
 	int retorno=-1;
+	int costo;
 	if(arg!=NULL){
 		retorno=0;
-		if(((Mascota*)arg)->costoTratamiento>10000)
+		Mascota_getCostoTratamiento((Mascota*)arg, &costo);
+		if(costo>10000)
 			retorno=1;
 	}
 	return retorno;

@@ -111,8 +111,13 @@ int main(void) {
 	            	break;
 				case 9:
 	            	salida=controller_filterMascota(listaMascotas);
-	            	if(salida==-1){
+	            	switch(salida){
+	            	case -1:
 	            		printf("- NO SE ENCONTRARON MASCOTAS PARA EL FILTRO APLICADO.\n");
+	            		break;
+	            	case -2:
+	            		printf("- APLICACION DE FILTRO CANCELADA.\n");
+	            		break;
 	            	}
 					break;
 	            case 10:

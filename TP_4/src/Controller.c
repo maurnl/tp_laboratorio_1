@@ -353,15 +353,15 @@ int controller_mapMascota(LinkedList* pArrayListMascotas){
 /**
  * filter Mascota Aplica un filtro a traves de ll_filter a una linkedList y la muestra
  * @param pArrayListMascotas
- * @return -2 si puntero a null o lista original vacia; -1 si no hay elementos que cumplan el criterio; 0 si funciono
+ * @return -3 si puntero a null o lista original vacia; -1 si no hay elementos que cumplan el criterio; 0 si funciono
  */
 int controller_filterMascota(LinkedList* pArrayListMascotas){
-	int retorno=-2;
+	int retorno=-3;
 	int (*pFuncion)(void* arg);
 	int filtro;
 	LinkedList* listaFiltrada=NULL;
 	if(pArrayListMascotas!=NULL&&!ll_isEmpty(pArrayListMascotas)){
-		retorno=-1;
+		retorno=-2;
 		getPositiveInt("- INGRESE FILTRO A APLICAR:\n\t1. FILTRAR MASCOTAS ESTERILIZADAS.\n\t2. FILTRAR MASCOTAS CON TODAS LAS VACUNAS.\n\t3. FILTRAR COSTO MAYOR A $10000\n",&filtro,1,3);
 		switch(filtro){
 		case 1:

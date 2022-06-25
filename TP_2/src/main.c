@@ -19,7 +19,8 @@ int main(void) {
 	int opcion,salida;
 	Passenger listPassengers[PASSENGER_LEN];
 	initPassengers(listPassengers, PASSENGER_LEN);
-	hardcodePassengers(listPassengers,PASSENGER_LEN);
+	// Hardcodeo de 10 pasajeros con nombres y codigos variados a modo de prueba. Descomentar para usar.
+	//hardcodePassengers(listPassengers,PASSENGER_LEN);
 	do{
 		opcion=menu();
 		switch(opcion){

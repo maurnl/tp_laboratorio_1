@@ -5,6 +5,7 @@
 #include "Passenger.h"
 #include "parser.h"
 #include "utn.h"
+#include "controller.h"
 /**
  * @brief Obtiene el id máximo de una linkedlist
  * @param LinkedList* pArrayListPassenger
@@ -164,10 +165,10 @@ int controller_addPassenger(LinkedList* pArrayListPassenger,int* id)
 		printf("\t\t** CARGA DE PASAJERO **\n");
 		if(	!(getAlphabeticText("- INGRESE NOMBRE DEL PASAJERO:", nombreBuff, 50)
 			||getAlphabeticText("- INGRESE APELLIDO DEL PASAJERO:", apellidoBuff, 50)
-			||getPositiveFloat("- INGRESE PRECIO:", &precioBuff, 10000, 250000)
-			||getPositiveInt("- INGRESE TIPO DE PASAJERO: ", &tipoBuff, 0, 4)
-			||getAlphanumericText("- INGRESE CODIGO DE VUELO: ", codigoBuff, 9)
-			||getAlphabeticText("- INGRESE ESTADO DE VUELO: ", estadoBuff, 25)) ) {
+			||getPositiveFloat("- INGRESE PRECIO($10000-$250000):", &precioBuff, 10000, 250000)
+			||getPositiveInt("- INGRESE TIPO DE PASAJERO POR ID(1.FirstClass. 2.ExecutiveClass. 3.EconomyClass): ", &tipoBuff, 1, 3)
+			||getAlphanumericText("- INGRESE CODIGO DE VUELO(MAX 9 DIGITOS): ", codigoBuff, 9)
+			||getAlphabeticText("- INGRESE ESTADO DE VUELO(En vuelo, Demorado, En horario): ", estadoBuff, 25)) ) {
 			passengerBuff=Passenger_newParametros(*id,nombreBuff, apellidoBuff, precioBuff, tipoBuff, codigoBuff, estadoBuff);
 			if(passengerBuff!=NULL){
 				ll_add(pArrayListPassenger, passengerBuff);
@@ -192,48 +193,56 @@ int controller_editPassenger(LinkedList* pArrayListPassenger)
 {
 	int retorno=-3;
 	Passenger* pasajero=NULL;
-	int id;
-	int indice;
-	int maxId;
+	int id=-1;
+	int indice=-1;
 	int subOpcion;
 	char nombreBuff[50], apellidoBuff[50], codigoBuff[9];
 	float precioBuff;
 	int tipoBuff;
 	if(pArrayListPassenger!=NULL&&!ll_isEmpty(pArrayListPassenger)){
-		maxId=ll_len(pArrayListPassenger);
-		getPositiveInt("- INGRESE ID A BUSCAR: ", &id, 0, maxId);
+		controller_ListPassenger(pArrayListPassenger);
+		getPositiveInt("- INGRESE ID A BUSCAR: ", &id, 0, ll_len(pArrayListPassenger));
 		indice=Passenger_getPassengerById(pArrayListPassenger, id);
 		if(indice!=-1){
 			pasajero=(Passenger*)ll_get(pArrayListPassenger, indice);
 			if(pasajero!=NULL){
 				do{
+					Passenger_printHeader(ll_len(pArrayListPassenger));
 					retorno=Passenger_mostrarPasajero(pasajero);
-					getPositiveInt("- INGRESE DATO A MODIFICAR:\n\t1. NOMBRE.\n\t2.APELLIDO\n\t3.PRECIO.\n\t4.TIPO DE PASAJERO.\n\t5.CODIGO DE VUELO", &subOpcion, 1, 5);
+					getPositiveInt("- INGRESE DATO A MODIFICAR:\n\t1. NOMBRE.\n\t2. APELLIDO\n\t3. PRECIO.\n\t4. TIPO DE PASAJERO.\n\t5. CODIGO DE VUELO\n\t6. ", &subOpcion, 1, 6);
 					switch(subOpcion){
 					case 1:
-						getAlphabeticText("- INGRESE NOMBRE NUEVO: ", nombreBuff, 50);
-						Passenger_setNombre(pasajero, nombreBuff);
+						if(!getAlphabeticText("- INGRESE NOMBRE NUEVO: ", nombreBuff, 50)){
+							Passenger_setNombre(pasajero, nombreBuff);
+							printf("- MODIFICADO EXITOSAMENTE.\n");
+						}
 						break;
 					case 2:
-						getAlphabeticText("- INGRESE APELLIDO NUEVO: ", apellidoBuff, 50);
-						Passenger_setApellido(pasajero, apellidoBuff);
+						if(!getAlphabeticText("- INGRESE APELLIDO NUEVO: ", apellidoBuff, 50)){
+							Passenger_setApellido(pasajero, apellidoBuff);
+							printf("- MODIFICADO EXITOSAMENTE.\n");
+						}
 						break;
 					case 3:
-						getPositiveFloat("- INGRESE PRECIO NUEVO: ", &precioBuff, 5000, 500000);
-						Passenger_setPrecio(pasajero, precioBuff);
+						if(!getPositiveFloat("- INGRESE PRECIO NUEVO: ", &precioBuff, 5000, 500000)){
+							Passenger_setPrecio(pasajero, precioBuff);
+							printf("- MODIFICADO EXITOSAMENTE.\n");
+						}
 						break;
 					case 4:
-						getPositiveInt("- INGRESE TIPO DE PASAJERO NUEVO: ", &tipoBuff, 1, 4);
-						Passenger_setTipoPasajero(pasajero, tipoBuff);
+						if(!getPositiveInt("- INGRESE TIPO DE PASAJERO NUEVO: ", &tipoBuff, 1, 4)){
+							Passenger_setTipoPasajero(pasajero, tipoBuff);
+							printf("- MODIFICADO EXITOSAMENTE.\n");
+						}
 						break;
 					case 5:
-						getAlphanumericText("- INGRESE CODIGO DE VUELO NUEVO: ", codigoBuff, 9);
-						Passenger_setCodigoVuelo(pasajero, codigoBuff);
+						if(!getAlphanumericText("- INGRESE CODIGO DE VUELO NUEVO: ", codigoBuff, 9)){
+							Passenger_setCodigoVuelo(pasajero, codigoBuff);
+							printf("- MODIFICADO EXITOSAMENTE.\n");
+						}
 						break;
 					}
-					printf("- MODIFICADO EXISTOSAMENTE.\n");
-					retorno=Passenger_mostrarPasajero(pasajero);
-				}while(confirm("- DESEA MODIFICAR OTRO DATO (S/N)?"));
+				}while(subOpcion!=6);
 			}
 		} else {
 			retorno=-2;
@@ -253,13 +262,17 @@ int controller_removePassenger(LinkedList* pArrayListPassenger)
 {
 	int retorno=-1;
 	Passenger* pasajero=NULL;
-	int id, indice;
+	int id=-1;
+	int indice=-1;
 	if(pArrayListPassenger!=NULL&&!ll_isEmpty(pArrayListPassenger)){
 		do{
+			indice=-1;
+			controller_ListPassenger(pArrayListPassenger);
 			getPositiveInt("- INGRESE ID DE PASAJERO A BUSCAR: ", &id, 0, ll_len(pArrayListPassenger));
 			indice=Passenger_getPassengerById(pArrayListPassenger, id);
 			pasajero=(Passenger*)ll_get(pArrayListPassenger, indice);
 			if(indice!=-1){
+				Passenger_printHeader(ll_len(pArrayListPassenger));
 				Passenger_mostrarPasajero(pasajero);
 				if(pasajero!=NULL&&confirm("- CONFIRME BAJA DE PASAJERO(S/N).")){
 					//Passenger_setIsEmpty(pasajero, 1);

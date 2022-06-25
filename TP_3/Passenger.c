@@ -143,6 +143,7 @@ int Passenger_getNombre(Passenger* this,char* nombre)
 	int retorno=-1;
 	if(this!=NULL&&nombre!=NULL){
 		strcpy(nombre, this->nombre);
+		stringToUpper(this->nombre, 1);
 		retorno=0;
 	}
 	return retorno;
@@ -151,8 +152,8 @@ int Passenger_getNombre(Passenger* this,char* nombre)
 int Passenger_setApellido(Passenger* this,char* apellido){
 	int retorno=-1;
 	if(this!=NULL&&apellido!=NULL){
-		stringToUpper(apellido, 1);
 		strcpy(this->apellido, apellido);
+		stringToUpper(this->apellido, 1);
 		retorno=0;
 	}
 	return retorno;

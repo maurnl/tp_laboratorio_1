@@ -5,12 +5,10 @@
  *      Author: Mauro
  */
 
-#ifndef UTN_H_
-#define UTN_H_
-#endif /* UTN_H_ */
 
 int stringIsInt(char string[]);
 int stringIsAlphabetic(char string[]);
+int stringIsAlphanumeric(char string[]);
 int getPositiveInt(char mensaje[], int* resultado, int min, int max);
 int stringIsFloat(char string[]);
 int getPositiveFloat(char mensaje[], float* resultado, float min, float max);

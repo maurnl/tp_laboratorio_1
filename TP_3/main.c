@@ -61,13 +61,13 @@ int main()
             case 3:
             	id=controller_getNextId(listaPasajeros);
             	salida=controller_addPassenger(listaPasajeros, &id);
+            	if(salida==-2){
+            		printf("- DATO NO VALIDO. REINTENTE.\n");
+            	}
             	break;
             case 4:
             	salida=controller_editPassenger(listaPasajeros);
             	switch(salida){
-					case 0:
-						printf("- PASAJERO ENCONTRADO Y MOSTRADO.\n");
-						break;
 					case -1:
 						printf("- ERROR AL MOSTRAR PASAJERO.\n");
 						break;

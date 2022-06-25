@@ -167,7 +167,7 @@ int controller_addPassenger(LinkedList* pArrayListPassenger,int* id)
 			||getAlphabeticText("- INGRESE APELLIDO DEL PASAJERO:", apellidoBuff, 50)
 			||getPositiveFloat("- INGRESE PRECIO($10000-$250000):", &precioBuff, 10000, 250000)
 			||getPositiveInt("- INGRESE TIPO DE PASAJERO POR ID(1.FirstClass. 2.ExecutiveClass. 3.EconomyClass): ", &tipoBuff, 1, 3)
-			||getAlphanumericText("- INGRESE CODIGO DE VUELO(MAX 9 DIGITOS): ", codigoBuff, 9)
+			||getAlphanumericText("- INGRESE CODIGO DE VUELO(MAX 9 DIGITOS EJ 'FR5678G'): ", codigoBuff, 9)
 			||getAlphabeticText("- INGRESE ESTADO DE VUELO(En vuelo, Demorado, En horario): ", estadoBuff, 25)) ) {
 			passengerBuff=Passenger_newParametros(*id,nombreBuff, apellidoBuff, precioBuff, tipoBuff, codigoBuff, estadoBuff);
 			if(passengerBuff!=NULL){

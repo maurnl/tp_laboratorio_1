@@ -205,7 +205,7 @@ int controller_editPassenger(LinkedList* pArrayListPassenger)
 		indice=Passenger_getPassengerById(pArrayListPassenger, id);
 		if(indice!=-1){
 			pasajero=(Passenger*)ll_get(pArrayListPassenger, indice);
-			if(pasajero!=NULL&&!Passenger_getIsEmpty(pasajero)){
+			if(pasajero!=NULL){
 				do{
 					retorno=Passenger_mostrarPasajero(pasajero);
 					getPositiveInt("- INGRESE DATO A MODIFICAR:\n\t1. NOMBRE.\n\t2.APELLIDO\n\t3.PRECIO.\n\t4.TIPO DE PASAJERO.\n\t5.CODIGO DE VUELO", &subOpcion, 1, 5);
@@ -259,7 +259,7 @@ int controller_removePassenger(LinkedList* pArrayListPassenger)
 			getPositiveInt("- INGRESE ID DE PASAJERO A BUSCAR: ", &id, 0, ll_len(pArrayListPassenger));
 			indice=Passenger_getPassengerById(pArrayListPassenger, id);
 			pasajero=(Passenger*)ll_get(pArrayListPassenger, indice);
-			if(indice!=-1&&!Passenger_getIsEmpty(pasajero)){
+			if(indice!=-1){
 				Passenger_mostrarPasajero(pasajero);
 				if(pasajero!=NULL&&confirm("- CONFIRME BAJA DE PASAJERO(S/N).")){
 					//Passenger_setIsEmpty(pasajero, 1);
@@ -294,9 +294,7 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger)
     	Passenger_printHeader(len);
 		for(int i=0;i<len;i++){
 			pasajero=(Passenger*)ll_get(pArrayListPassenger,i);
-			if(!Passenger_getIsEmpty(pasajero)){
-				Passenger_mostrarPasajero(pasajero);
-			}
+			Passenger_mostrarPasajero(pasajero);
     	}
 		retorno=0;
     }

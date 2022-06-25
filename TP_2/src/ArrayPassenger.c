@@ -1,306 +1,285 @@
 /*
  * ArrayPassenger.c
  *
- *  Created on: 29 abr. 2022
+ *  Created on: 25 jun. 2022
  *      Author: Mauro
  */
-#include "ArrayPassenger.h"
-#include "funciones.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
+#include "utn.h"
+#include "ArrayPassenger.h"
 
-void printFlight(char code[10], char description[10]){
-		printf("%-10s\t\t%-8s\n", code, description);
-}
-
-int printFlights(Flight* list, int len){
-	int retorno;
-	int i;
-	retorno=-1;
-	if(list!=NULL && len>0){
-		printf("                           ** LISTADO DE VUELOS DISPONIBLES **\n");
-		printf("----------------------------------------------------------------------------------------\n");
-		printf("CODIGO      	        ESTADO\n");
-		printf("----------------------------------------------------------------------------------------\n");
-		for(i=0;i<len;i++){
-			printFlight((list + i)->flycode, (list + i)->status);
+/**
+ * checks if a passengers list is empty
+ * @return 1 if its empty 0 if not
+ */
+int passengerListIsEmpty(Passenger* list, int len){
+	int returnAux=1;
+	for(int i=0;i<len;i++){
+		if((*(list+i)).isEmpty==0){
+			returnAux=0;
+			break;
 		}
-		retorno=0;
 	}
-	return retorno;
+	return returnAux;
 }
-
-int getTypePassengerByCode(TypePassenger* list, int len, int typePassenger, char description[]){
-	int retorno;
-	int i;
-	retorno=-1;
-	if(description!=NULL){
-		strcpy(description, "N/A");
-		for(i=0;i<len;i++){
-			if((list + i)->idTypePassenger==typePassenger) {
-				strcpy(description, (list + i)->description);
+/**
+ * returns the first empty index in a passengers array
+ * @param list pointer to passengers array
+ * @param len int
+ * @return -1 if no empty space or 0 if ok
+ */
+int getEmptyPassengerIndex(Passenger* list, int len){
+	int returnAux=-1;
+	if(list!=NULL&&len>0){
+		for(int i=0;i<len;i++){
+			if((*(list+i)).isEmpty==1){
+				returnAux=i;
 				break;
 			}
 		}
 	}
-	return retorno;
+	return returnAux;
 }
-
-int getEmptyIndex(Passenger* list, int len) {
-	int retorno;
-	int indiceLibre;
-	int flagLibre;
-	retorno = -1;
-	indiceLibre = -1;
-	flagLibre = 0;
-	if(list!=NULL && len>0) {
-		do {
-			indiceLibre++;
-			if(list[indiceLibre].isEmpty==1) {
-				flagLibre=1;
+/**
+ * calculates the next passenger id by storing it as static
+ * @return the next passenger id
+ */
+int nextPassengerId(void){
+	static int id=0;
+	id++;
+	return id;
+}
+/**
+ * type passenger int id to string
+ * @param typeId id
+ * @param typeDesc str
+ * @return -1 if null pointer or invalid type id
+ */
+int typePassengerToStr(int typeId, char* typeDesc){
+	int returnAux=-1;
+	if(typeDesc!=NULL&&typeId>0&&typeId<4){
+		returnAux=0;
+		switch(typeId){
+			case 1:
+				strcpy(typeDesc, "FIRST CLASS");
+				break;
+			case 2:
+				strcpy(typeDesc, "EXECUTIVE CLASS");
+				break;
+			case 3:
+				strcpy(typeDesc, "TURIST CLASS");
+				break;
+		}
+	}
+	return returnAux;
+}
+/**
+ * type passenger string to int
+ * @param type string
+ * @return -1 if null pointer or invalid type or type id if ok
+ */
+int typePassengerStrToInt(char* type){
+	int returnAux=-1;
+	if(type!=NULL){
+		stringToUpper(type,strlen(type));
+		if(!strcmp("FIRST CLASS",type)){
+			returnAux=1;
+		}else if(!strcmp("EXECUTIVE CLASS",type)){
+			returnAux=2;
+		}else if(!strcmp("TURIST CLASS",type)){
+			returnAux=3;
+		}
+	}
+	return returnAux;
+}
+/** \brief To indicate that all position in the array are empty,
+* this function put the flag (isEmpty) in TRUE in all
+* position of the array
+* \param list Passenger* Pointer to array of passenger
+* \param len int Array length
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+* */
+int initPassengers(Passenger* list, int len){
+	int returnAux=-1;
+	if(list!=NULL&&len>0){
+		for(int i=0;i<len;i++){
+			(*(list+i)).isEmpty=1;
+		}
+		returnAux=0;
+	}
+	return returnAux;
+}
+/** \brief add in a existing list of passengers the values received as parameters
+* in the first empty position
+* \param list passenger*
+* \param len int
+* \param id int
+* \param name[] char
+* \param lastName[] char
+* \param price float
+* \param typePassenger int
+* \param flycode[] char
+* \return int Return (-1) if Error [Invalid length or NULL pointer or without free space] - (0) if Ok
+* */
+int addPassengers(Passenger* list, int len, int id, char name[], char lastName[], float price, int typePassenger, char flycode[],int statusFlight){
+	int returnAux=-1;
+	int freeIndex=getEmptyPassengerIndex(list,len);
+	char typeDesc[25];
+	if(list!=NULL&&len>0&&freeIndex!=-1&&name!=NULL&&lastName!=NULL){
+		(*(list+freeIndex)).id=id;
+		strcpy((*(list+freeIndex)).name, name);
+		strcpy((*(list+freeIndex)).lastName, lastName);
+		(*(list+freeIndex)).price=price;
+		(*(list+freeIndex)).typePassenger.typeId=typePassenger;
+		typePassengerToStr(typePassenger, typeDesc);
+		strcpy((*(list+freeIndex)).typePassenger.typeDescription,typeDesc);
+		strcpy((*(list+freeIndex)).flycode, flycode);
+		(*(list+freeIndex)).statusFlight=statusFlight;
+		(*(list+freeIndex)).isEmpty=0;
+		returnAux=0;
+	}
+	return returnAux;
+}
+/** \brief find a Passenger by Id en returns the index position in array.
+*
+* \param list Passenger*
+* \param len int
+* \param id int
+* \return Return passenger index position or (-1) if [Invalid length or NULL pointer received or passenger not found]
+* */
+int findPassengerById(Passenger* list, int len, int id){
+	int returnAux=-1;
+	if(list!=NULL&&len>0&&id>0){
+		for(int i=0;i<len;i++){
+			if((*(list+i)).id==id){
+				returnAux=i;
+				break;
 			}
-		}while(flagLibre==0 && indiceLibre<len);
-		if(flagLibre) {
-			retorno = indiceLibre;
 		}
 	}
-	return retorno;
+	return returnAux;
 }
-
-int initPassengers(Passenger* list, int len)	{
-	int retorno;
-	int i;
-	retorno=-1;
-	if(list!=NULL && len>0) {
-		for(i=0;i<len;i++){
-			list[i].isEmpty=1;
-		}
-		retorno=0;
-	}
-	return retorno;
-}
-
-int addPassenger(Passenger* list, int len, int id, char name[],char lastName[],float price,int typePassenger, char flycode[])	{
-	int retorno;
+/** \brief Remove a Passenger by Id (put isEmpty Flag in 1)
+*
+* \param list Passenger*
+* \param len int
+* \param id int
+* \return int Return (-1) if Error [Invalid length or NULL pointer or if can't
+find a passenger] - (0) if Ok
+*
+*/
+int removePassenger(Passenger* list, int len, int id){
+	int returnAux=-1;
 	int index;
-	retorno=-1;
-	index = getEmptyIndex(list, len);
-	if(list!=NULL && len>0 && id>0 && name!=NULL && lastName!=NULL && price>0 && typePassenger>0 && flycode!=NULL && index!=-1){
-		list[index].id = id;
-		strcpy(list[index].name, name);
-		strcpy(list[index].lastName, lastName);
-		list[index].price = price;
-		list[index].typePassenger = typePassenger;
-		strcpy(list[index].flycode, flycode);
-		list[index].isEmpty=0;
-		retorno=0;
+	if(list!=NULL&&len>0&&id>0&&findPassengerById(list, len,id)!=-1){
+		index=findPassengerById(list, len,id);
+		(*(list+index)).isEmpty=1;
+		returnAux=0;
 	}
-	return retorno;
+	return returnAux;
 }
-
-
-int findPassengerById(Passenger* list, int len,int id)	{
-	int retorno;
-	int indiceId;
-	int flagEnctontrado;
-	retorno = -1;
-	indiceId = -1;
-	flagEnctontrado = 0;
-	if(list!=NULL && len>0 && id>0) {
+/** \brief Sort the elements by name in the array of passengers, the argument order indicate UP or DOWN order
+* \param list Passenger*
+* \param len int
+* \param order int [1] indicate UP - [0] indicate DOWN
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*/
+int sortPassengers(Passenger* list,int len, int order){
+	int retorno=-1;
+	int flagSwapeo;
+	Passenger aux;
+	if(list!=NULL&&len>0){
 		do {
-			indiceId++;
-			if(list[indiceId].id == id && list[indiceId].isEmpty==0) {
-				flagEnctontrado=1;
-			}
-		}while(flagEnctontrado==0 && indiceId<len);
-		if(flagEnctontrado) {
-			retorno = indiceId;
-		}
-	}
-	return retorno;
-}
-
-
-int removePassenger(Passenger* list, int len, int id)	{
-	int retorno;
-	int i;
-	retorno=-1;
-	if(list!=NULL && len>0 && id>0) {
-		for(i=0;i<len;i++) {
-			if(list[i].id==id && list[i].isEmpty==0) {
-				list[i].isEmpty=1;
-				retorno=0;
-			}
-		}
-	}
-	return retorno;
-}
-
-
-int sortPassengers(Passenger* list, int len, int order)	{
-	int retorno;
-	Passenger tmpActual;
-	int i;
-	int j;
-	retorno=-1;
-	if(list!=NULL && len>0) {
-		for(i=1;i<len;i++) {
-			tmpActual = list[i];
-			j=i-1;
-			if(order==1) {
-				while(j>=0 && strcmp(tmpActual.lastName, list[j].lastName)<0) { // Decreciente. Evalua tmpActual con todos los elementos a su izquierda y desplaza a la derecha
-					list[j+1] = list[j];
-					j--;
+			flagSwapeo = 0;
+			for(int i=1; i<len; i++) {
+				if((order&&(strcmp((*(list+i)).name, (*(list+i-1)).name)<0||(!strcmp((*(list+i)).name, (*(list+i-1)).name)&&strcmp((*(list+i)).typePassenger.typeDescription, (*(list+i-1)).typePassenger.typeDescription)>0)))||(!order&&((strcmp((*(list+i)).name, (*(list+i-1)).name)>0||(!strcmp((*(list+i)).name, (*(list+i-1)).name)&&strcmp((*(list+i)).typePassenger.typeDescription, (*(list+i-1)).typePassenger.typeDescription)<0))))) {
+					aux = *(list+i);
+					*(list+i) = *(list+i-1);
+					*(list+i-1) = aux;
+					flagSwapeo = 1;
 				}
-				list[j+1]=tmpActual;
-			} else {
-				while(j>=0 && strcmp(tmpActual.lastName, list[j].lastName)>0) {// Creciente. Evalua tmpActual con todos los elementos a su izquierda y desplaza a la derecha
-					list[j+1] = list[j];
-					j--;
+			}
+		} while(flagSwapeo);
+		retorno = 1;
+	}
+	return retorno;
+}
+/**
+ * prints a single passenger info
+ * @param passenger passenger
+ */
+void printPassenger(Passenger passenger){
+	printf("%-4d%-15s\t%-15s\t%-8.2f\t%-16s\t%-10s\t",passenger.id,passenger.name,passenger.lastName,passenger.price,passenger.typePassenger.typeDescription,passenger.flycode);
+	if(passenger.statusFlight){
+		printf("EN VUELO\n");
+	} else{
+		printf("ESPERANDO\n");
+	}
+}
+/** \brief print the content of passengers array
+* \param list Passenger*
+* \param length int
+* \return int
+*/
+int printPassengers(Passenger* list, int len){
+	int returnAux=-1;
+	if(list!=NULL&&len>0){
+		printf("ID  NOMBRE              APELLIDO        PRECIO          TIPO DE PASAJERO        CODIGO DE VUELO ESTADO DE VUELO\n");
+		printf("---------------------------------------------------------------------------------------------------------------\n");
+		for(int i=0;i<len;i++){
+			if(!(*(list+i)).isEmpty)
+				printPassenger(*(list+i));
+		}
+		printf("---------------------------------------------------------------------------------------------------------------\n");
+		returnAux=0;
+	}
+	return returnAux;
+}
+/** \brief Sort the elements by flycode in the array of passengers, the argument order indicate UP or DOWN order
+* \param list Passenger*
+* \param len int
+* \param order int [1] indicate UP - [0] indicate DOWN
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*/
+int sortPassengersByFlycode(Passenger* list, int len, int order){
+	int retorno=-1;
+	int flagSwapeo;
+	Passenger aux;
+	if(list!=NULL&&len>0){
+		do {
+			flagSwapeo = 0;
+			for(int i=1; i<len; i++) {
+				if((order&&(strcmp((*(list+i)).flycode, (*(list+i-1)).flycode)<0||(!strcmp((*(list+i)).flycode, (*(list+i-1)).flycode)&&strcmp((*(list+i)).typePassenger.typeDescription, (*(list+i-1)).typePassenger.typeDescription)>0)))||(!order&&((strcmp((*(list+i)).name, (*(list+i-1)).name)>0||(!strcmp((*(list+i)).name, (*(list+i-1)).name)&&strcmp((*(list+i)).typePassenger.typeDescription, (*(list+i-1)).typePassenger.typeDescription)<0))))) {
+					aux = *(list+i);
+					*(list+i) = *(list+i-1);
+					*(list+i-1) = aux;
+					flagSwapeo = 1;
 				}
-				list[j+1]=tmpActual;
 			}
-		}
-		for(i=1;i<len;i++) {
-			tmpActual = list[i];
-			j=i-1;
-			if(order==1) {
-				while(j>=0 && tmpActual.typePassenger<list[j].typePassenger) { // Decreciente. Evalua tmpActual con todos los elementos a su izquierda y desplaza a la derecha
-					list[j+1] = list[j];
-					j--;
-				}
-				list[j+1]=tmpActual;
-			} else {
-				while(j>=0 && tmpActual.typePassenger>list[j].typePassenger) {// Creciente. Evalua tmpActual con todos los elementos a su izquierda y desplaza a la derecha
-					list[j+1] = list[j];
-					j--;
-				}
-				list[j+1]=tmpActual;
-			}
-		}
-		retorno=0;
+		} while(flagSwapeo);
+		retorno = 1;
 	}
 	return retorno;
 }
 
-
-void printPassenger(TypePassenger* listTypes, int lengthTypes, int id, char lastName[], char name[], float price, char flycode[], int typePassenger, int header){
-	char typePassengerDesc[25];
-	getTypePassengerByCode(listTypes, lengthTypes, typePassenger, typePassengerDesc);
-	if(header==0) {
-		printf("%d\t %-10s\t %-8s\t $%-6.2f\t %-4s\t\t %s\n",id, lastName, name, price, flycode, typePassengerDesc);
-	} else {
-		printf("----------------------------------------------------------------------------------------\n");
-		printf("ID       APELLIDO        NOMBRE          PRECIO          CODIGO          TIPO DE PASAJERO\n");
-		printf("%d\t %-10s\t %-8s\t $%-6.2f\t %-4s\t\t %s\n",id, lastName, name, price, flycode, typePassengerDesc);
-		printf("----------------------------------------------------------------------------------------\n");
-	}
-}
-
-int printPassengers(Passenger* list, TypePassenger* listTypes,int length, int lengthTypes) {
-	int retorno;
-	int i;
-	retorno=-1;
-	if(list!=NULL && length>0) {
-		printf("                           ** LISTADO PASAJEROS **\n");
-		printf("----------------------------------------------------------------------------------------\n");
-		printf("ID       APELLIDO        NOMBRE          PRECIO          CODIGO          TIPO DE PASAJERO\n");
-		for(i=0;i<length;i++) {
-			if((list+i)->isEmpty==0){
-				printPassenger(listTypes, lengthTypes, (list+i)->id, (list+i)->lastName, (list+i)->name, (list+i)->price, (list+i)->flycode, (list + i)->typePassenger, 0);
-			}
-		}
-		printf("----------------------------------------------------------------------------------------\n");
-		retorno=0;
-	}
-	return retorno;
-}
-
-int printPassengersByCode(Passenger* list, Flight* listFlight,int length, int lengthFlight) {
-	int retorno;
-	int i;
-	char status[10];
-	retorno=-1;
-	if(list!=NULL && length>0) {
-		printf("                           ** LISTADO PASAJEROS **\n");
-		printf("----------------------------------------------------------------------------------------\n");
-		printf("ID       APELLIDO        NOMBRE          PRECIO          CODIGO          ESTADO DE VUELO\n");
-		for(i=0;i<length;i++) {
-			if((list+i)->isEmpty==0){
-				getFlightStatusByCode(listFlight, lengthFlight, (list+i)->flycode, status);
-				printf("%d\t %-10s\t %-8s\t $%-6.2f\t %-4s\t\t %s\n",(list+i)->id, (list+i)->lastName, (list+i)->name, (list+i)->price, (list+i)->flycode, status);
-			}
-		}
-		printf("----------------------------------------------------------------------------------------\n");
-		retorno=0;
-	}
-	return retorno;
-}
-
-int getFlightStatusByCode(Flight* list, int len, char code[], char status[]){
-	int retorno;
-	int i;
-	retorno=-1;
-	if(list!=NULL && code!=NULL && status!=NULL){
-		strcpy(status,"N/A");
-		for(i=0;i<len;i++){
-			if(strcmp((list+i)->flycode, code)==0){
-				strcpy(status, (list+i)->status);
-			}
-		}
-		retorno=0;
-	}
-	return retorno;
-}
-
-int sortPassengersByCode(Passenger* list, Flight* flycodeList, int len, int flycodeLen)	{
-	int retorno;
-	Passenger tmpActual;
-	int i;
-	int j;
-	char statusActual[10];
-	char statusComp[10];
-	retorno=-1;
-	if(list!=NULL && len>0) {
-		for(i=1;i<len;i++) {
-			tmpActual = list[i];
-			j=i-1;
-			while(j>=0 && strcmp(tmpActual.flycode, list[j].flycode)<0) { // Decreciente. Evalua tmpActual con todos los elementos a su izquierda y desplaza a la derecha
-				list[j+1] = list[j];
-				j--;
-			}
-			list[j+1]=tmpActual;
-		}
-		for(i=1;i<len;i++) {
-			tmpActual = list[i];
-			getFlightStatusByCode(flycodeList, flycodeLen, list[i].flycode, statusActual);
-			j=i-1;
-			getFlightStatusByCode(flycodeList, flycodeLen, list[j].flycode, statusComp);
-			while(j>=0 && strcmp(statusActual, statusComp)<0) { // Decreciente. Evalua tmpActual con todos los elementos a su izquierda y desplaza a la derecha
-				list[j+1] = list[j];
-				j--;
-				getFlightStatusByCode(flycodeList, flycodeLen, list[j].flycode, statusComp);
-			}
-			list[j+1]=tmpActual;
-		}
-		retorno=0;
-	}
-	return retorno;
-}
-
-int getAveragePrice(Passenger* list, int len, float* average, float* total){
-	int retorno;
-	int contador;
-	int i;
-	float acumulador;
-	acumulador=0;
-	contador=0;
-	retorno=-1;
-	if(list!=NULL && len>0 && average!=NULL && total!=NULL){
-		for(i=0;i<len;i++) {
-			if((list + i)->isEmpty==0) {
-				acumulador=acumulador + ((list + i)->price);
+/**
+ * calculates total and average price if a passengers array
+ * @param list pointer to array of passengers
+ * @param len int
+ * @param average float to store result
+ * @param total float to store result
+ * @return -1 if null pointers or invalid len 0 if ok
+ */
+int getPassengersAverageAndTotalPrice(Passenger* list, int len, float* average, float* total){
+	int retorno=-1;
+	int contador=0;
+	float acumulador=0;
+	if(list!=NULL&&len>0&&average!=NULL&&total!=NULL){
+		for(int i=0;i<len;i++) {
+			if((*(list+i)).isEmpty==0){
+				acumulador+=((*(list+i)).price);
 				contador++;
 			}
 		}
@@ -310,60 +289,53 @@ int getAveragePrice(Passenger* list, int len, float* average, float* total){
 	}
 	return retorno;
 }
-
+/**
+ * prints passengers above average price
+ * @param list passengers list
+ * @param len int
+ * @return -1 if null pointers or invalid len or 0 iff ok
+ */
 int printHigherThanAveragePassengers(Passenger* list, int len){
-	int retorno;
-	int i;
+	int retorno=-1;
 	float promedio;
 	float total;
-	retorno=-1;
-	if(list!=NULL && len>0){
-		getAveragePrice(list, len, &promedio, &total);
-		printf("**         TOTAL DE PASAJES: $%.2f        **\n", total);
+	int contador=0;
+	if(list!=NULL&&len>0){
+		getPassengersAverageAndTotalPrice(list, len, &promedio, &total);
+		printf("**     TOTAL: $%.2f. PROMEDIO: $%.2f      **\n", total,promedio);
 		printf("** LISTADO PASAJEROS CON PRECIO MAYOR A $%.2f  **\n", promedio);
 		printf("-----------------------------------------------------\n");
 		printf("ID       APELLIDO        NOMBRE          PRECIO \n");
 		printf("-----------------------------------------------------\n");
-		for(i=0;i<len;i++){
-			if((list + i)->isEmpty==0 && (list + i)->price > promedio) {
-				printf("%d\t %-10s\t %-8s\t $%-6.2f\n", (list + i)->id, (list + i)->name, (list + i)->lastName, (list + i)->price);
+		for(int i=0;i<len;i++){
+			if((*(list+i)).isEmpty==0&&(*(list+i)).price>promedio) {
+				contador++;
+				printf("%d\t %-10s\t %-8s\t $%-6.2f\n", (*(list+i)).id, (*(list+i)).name, (*(list+i)).lastName, (*(list+i)).price);
 			}
 		}
 		printf("-----------------------------------------------------\n");
+		printf("** SUPERAN EL PROMEDIO %d PASAJEROS. **\n",contador);
 		retorno=0;
 	}
 	return retorno;
 }
 
-void altaForzada(Passenger* list, int len, int* activePassengers, int* passengerCounter){
-	addPassenger(list, len, *passengerCounter, "Esteban", "Gonzalez", 31200, 1, "3D9MCA");
-	*activePassengers = *activePassengers + 1;
-	*passengerCounter = *passengerCounter + 1;
-	addPassenger(list, len, *passengerCounter, "Carlos", "Nuñez", 21000.5, 3, "3D9MCA");
-	*activePassengers = *activePassengers + 1;
-	*passengerCounter = *passengerCounter + 1;
-	addPassenger(list, len, *passengerCounter, "Alberto", "Perez", 31099.5, 1, "3D9MCA");
-	*activePassengers = *activePassengers + 1;
-	*passengerCounter = *passengerCounter + 1;
-	addPassenger(list, len, *passengerCounter, "Santiago", "Sanchez", 25000.5, 3, "D9M3FC");
-	*activePassengers = *activePassengers + 1;
-	*passengerCounter = *passengerCounter + 1;
-	addPassenger(list, len, *passengerCounter, "Germán", "Diaz", 47400.5, 2, "0DC931");
-	*activePassengers = *activePassengers + 1;
-	*passengerCounter = *passengerCounter + 1;
-	addPassenger(list, len, *passengerCounter, "Yanina", "Ruiz", 27000.5, 1, "D0ASC9");
-	*activePassengers = *activePassengers + 1;
-	*passengerCounter = *passengerCounter + 1;
-	addPassenger(list, len, *passengerCounter, "Leandro", "Torres", 23000.5, 1, "D0ASC9");
-	*activePassengers = *activePassengers + 1;
-	*passengerCounter = *passengerCounter + 1;
-	addPassenger(list, len, *passengerCounter, "Malena", "Monet", 17000.5, 3, "D9M3FC");
-	*activePassengers = *activePassengers + 1;
-	*passengerCounter = *passengerCounter + 1;
-	addPassenger(list, len, *passengerCounter, "Mirta", "Vivian", 49500.5, 2, "D9M3FC");
-	*activePassengers = *activePassengers + 1;
-	*passengerCounter = *passengerCounter + 1;
-	addPassenger(list, len, *passengerCounter, "Sandra", "Edin", 17000.5, 1, "D0ASC9");
-	*passengerCounter = *passengerCounter + 1;
-	*activePassengers = *activePassengers + 1;
+/**
+ * Hardcodes 10 passengers
+ * @param list array of passengers
+ * @param len int
+ * @return 10 (hardcoded passengers qty)
+ */
+void hardcodePassengers(Passenger* list, int len){
+	char names[10][51]={"Zanella","Barbara","Cristian","Alberto","Quispe","Randall","Boo","Sullivan","Mike","Cachito"};
+	char lastnames[10][51]={"Le-Good","Cosins","Welbelove","Adrianello","Childerley","Huband","Sime","Kynastone","Simione","Dellar"};
+	float prices[10]={9000,15000,9000,45000,7050,22000,19000,14444,4500,9000};
+    int types[10]={3,2,1,3,2,1,3,2,1,3};
+    char codes[10][10]={"JK50001","LM50001","DF50001","AL50001","AL50001","BC50001","NO50001","NO50001","AL50001","YZ50001"};
+    char status[10]={1,0,1,1,1,0,1,1,0,0};
+    for(int i=0;i<10;i++){
+    	addPassengers(list,len,nextPassengerId(),names[i],lastnames[i],prices[i],types[i],codes[i],status[i]);
+    }
 }
+
+

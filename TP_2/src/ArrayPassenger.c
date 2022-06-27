@@ -336,6 +336,7 @@ void hardcodePassengers(Passenger* list, int len){
     for(int i=0;i<10;i++){
     	addPassengers(list,len,nextPassengerId(),names[i],lastnames[i],prices[i],types[i],codes[i],status[i]);
     }
+    printf("- PASAJEROS CARGADOS CORRECTAMENTE.\n");
 }
 
 
